@@ -1,4 +1,11 @@
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { SearchRequestDto } from './request/search.request.dto';
 
-@Controller('discovery')
-export class DiscoveryController {}
+@Controller('client')
+export class DiscoveryController {
+  
+  @Post('/v1/search')
+  search(@Body() searchDto: SearchRequestDto): string {
+    return 'This action returns all cats';
+  }
+}
