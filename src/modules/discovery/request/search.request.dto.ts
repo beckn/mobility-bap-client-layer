@@ -15,8 +15,8 @@ interface SearchCriteria {
   deliveryLocation?: string;
   providerId?: string;
   categoryId?: string;
-  pickupLocation: string;
-  dropLocation: string;
+  pickup_location: string;
+  drop_location: string;
   providerName?: string;
   categoryName?: string;
 }
