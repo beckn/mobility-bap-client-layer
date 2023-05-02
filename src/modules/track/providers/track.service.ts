@@ -14,9 +14,9 @@ export class TrackService {
     private readonly contextFactory: ContextFactory
   ){}
 
-  async search(requestPayload: TrackRequestDto): Promise<any> {
+  async track(requestPayload: TrackRequestDto): Promise<any> {
     try {
-      const context = this.contextFactory.create(ProtocolContextAction.SELECT)
+      const context = this.contextFactory.create(ProtocolContextAction.TRACK)
     
       const payload = {
         context: context,

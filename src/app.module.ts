@@ -1,3 +1,4 @@
+import { SupportModule } from "./modules/support/support.module";
 import { TrackModule } from "./modules/track/track.module";
 import { StatusModule } from "./modules/status/status.module";
 import { GetQuoteModule } from "./modules/get_quote/get_quote.module";
@@ -10,6 +11,7 @@ import { HttpModule } from "@nestjs/axios";
 
 @Module({
   imports: [
+    SupportModule,
     TrackModule,
     StatusModule,
     GetQuoteModule,
@@ -17,7 +19,7 @@ import { HttpModule } from "@nestjs/axios";
     DiscoveryModule,
     HttpModule,
   ],
-  controllers: [ AppController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}

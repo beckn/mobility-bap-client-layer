@@ -14,9 +14,9 @@ export class StatusService {
     private readonly contextFactory: ContextFactory
   ){}
 
-  async search(requestPayload: StatusRequestDto): Promise<any> {
+  async status(requestPayload: StatusRequestDto): Promise<any> {
     try {
-      const context = this.contextFactory.create(ProtocolContextAction.SELECT)
+      const context = this.contextFactory.create(ProtocolContextAction.STATUS)
     
       const payload = {
         context: context,
