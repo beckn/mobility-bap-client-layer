@@ -16,7 +16,7 @@ export class StatusController {
     
       }
       
-      @Post('/v1/redirect')
+      @Post('/v1/status')
       async status(@Body() statusDto: StatusRequestDto): Promise<any> {
         return await this.statusService.status(statusDto);
       }

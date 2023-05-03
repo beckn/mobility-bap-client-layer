@@ -1,3 +1,4 @@
+import { InitModule } from "./modules/init/init.module";
 import { SupportModule } from "./modules/support/support.module";
 import { TrackModule } from "./modules/track/track.module";
 import { StatusModule } from "./modules/status/status.module";
@@ -11,6 +12,7 @@ import { HttpModule } from "@nestjs/axios";
 
 @Module({
   imports: [
+    InitModule,
     SupportModule,
     TrackModule,
     StatusModule,

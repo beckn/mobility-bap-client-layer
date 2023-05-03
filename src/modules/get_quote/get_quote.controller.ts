@@ -15,7 +15,7 @@ export class GetQuoteController {
     
       }
       
-      @Post('/v1/select')
+      @Post('/v1/get_quote')
       async get(@Body() selectDto: SelectRequestDto): Promise<any> {
         return await this.getQuoteService.get(selectDto);
       }
