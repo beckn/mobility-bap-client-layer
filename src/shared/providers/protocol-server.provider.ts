@@ -9,6 +9,8 @@ export class ProtocolServerService {
   async executeAction(url: string, payload: any): Promise<any> {
     try {
       const finalUrl = `${protocolSeverBaseUrl}/${url}`
+      console.log("EP::",url)
+      console.log("URLL",finalUrl)
       const result = await this.httpService.post(finalUrl, payload).toPromise()
       return result.data
     } catch (error) {

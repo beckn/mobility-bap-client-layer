@@ -25,7 +25,7 @@ export class ContextFactory {
       core_version: becknConfig.core_version,
       bap_id: becknConfig.bap_id,
       bap_uri: becknConfig.bap_uri,
-      bppId: bppId,
+     bppId: bppId,
       bppUri: bppUri,
       transaction_id: transactionId,
       message_id: messageId,

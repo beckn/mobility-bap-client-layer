@@ -6,7 +6,7 @@ export class DiscoveryMapper {
     return {
       context: data.context,
       message: {
-        catalogs: [data.responses[0].message.catalog]
+        catalogs: data.responses
       }
     }
   }

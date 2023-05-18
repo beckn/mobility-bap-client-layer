@@ -15,13 +15,15 @@ export class GetQuoteService {
   ){}
 
   async get(requestPayload: SelectRequestDto): Promise<any> {
+
+    console.log("SELECT:::",requestPayload)
     try {
       const context = this.contextFactory.create(ProtocolContextAction.SELECT)
         const item_quantity={
-            count:requestPayload.message.cart.items.length
+            count:requestPayload[0].message.cart.items.length
         }
       const item=[{
-        id:requestPayload.message.cart.items[0].id,
+        id:requestPayload[0].message.cart.items[0].id,
         quantity:item_quantity
       }]
       const payload = {
@@ -29,14 +31,14 @@ export class GetQuoteService {
        message:{
         order:{
             provider:{
-                id:requestPayload.message.cart.items[0].provider.id,
-                locations:requestPayload.message.cart.items[0].provider.locations
+                id:requestPayload[0].message.cart.items[0].id,
+                locations:requestPayload[0].message.cart.items[0].provider.locations
             },
             items:item
         }
        }
       }
-      const result = await this.protocolServerService.executeAction(becknUrl.search, payload)
+      const result = await this.protocolServerService.executeAction(becknUrl.select, payload)
       const mappedResult = this.mapper.map(result)
       return mappedResult
     } catch (error) {

@@ -13,6 +13,7 @@ export class DiscoveryController {
   
   @Post('/v1/search')
   async search(@Body() searchDto: SearchRequestDto): Promise<any> {
+    console.log(searchDto)
     return await this.discoveryService.search(searchDto);
   }
 }

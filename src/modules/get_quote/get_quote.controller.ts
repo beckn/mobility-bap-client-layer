@@ -7,7 +7,7 @@ import { SelectRequestDto } from './request/select.request.dto';
 import { ProtocolContextAction } from 'src/shared/models/protocol-context.dto';
 import { GetQuoteService } from './providers/get_quote.service';
 
-@Controller()
+@Controller('client')
 export class GetQuoteController {
     constructor(
         private readonly getQuoteService: GetQuoteService
