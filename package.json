@@ -26,9 +26,13 @@
     "@nestjs/platform-express": "^9.4.0",
     "@nestjs/swagger": "^6.3.0",
     "axios": "^1.4.0",
+    "dotenv": "^16.0.3",
+    "nest-winston": "^1.9.2",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^7.2.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "winston": "^3.8.2",
+    "winston-cloudwatch": "^6.1.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",

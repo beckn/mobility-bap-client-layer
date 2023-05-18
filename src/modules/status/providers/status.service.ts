@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { StatusMapper } from "../mapper/status.mapper";
 import { ProtocolServerService } from "src/shared/providers/protocol-server.provider";
 import { StatusRequestDto } from "../request/status.request.dto";
@@ -11,7 +11,8 @@ export class StatusService {
   constructor(
     private readonly mapper: StatusMapper,
     private readonly protocolServerService: ProtocolServerService,
-    private readonly contextFactory: ContextFactory
+    private readonly contextFactory: ContextFactory,
+    private logger : Logger
   ){}
 
   async status(requestPayload: StatusRequestDto): Promise<any> {
@@ -24,10 +25,12 @@ export class StatusService {
        order_id:requestPayload.message.order_id
        }
       }
+      this.logger.log("api",payload);
       const result = await this.protocolServerService.executeAction(becknUrl.search, payload)
       const mappedResult = this.mapper.map(result)
       return mappedResult
     } catch (error) {
+      this.logger.error("error executing status call",error)
       throw error
     }
   }

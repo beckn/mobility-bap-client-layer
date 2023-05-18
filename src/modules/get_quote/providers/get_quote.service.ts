@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable ,Logger} from "@nestjs/common";
 import { GetQuoteMapper } from "../mapper/get_quote.mapper";
 import { ProtocolServerService } from "src/shared/providers/protocol-server.provider";
 import { SelectRequestDto } from "../request/select.request.dto";
@@ -11,7 +11,8 @@ export class GetQuoteService {
   constructor(
     private readonly mapper: GetQuoteMapper,
     private readonly protocolServerService: ProtocolServerService,
-    private readonly contextFactory: ContextFactory
+    private readonly contextFactory: ContextFactory,
+    private logger : Logger
   ){}
 
   async get(requestPayload: SelectRequestDto): Promise<any> {
@@ -38,10 +39,12 @@ export class GetQuoteService {
         }
        }
       }
-      const result = await this.protocolServerService.executeAction(becknUrl.select, payload)
-      const mappedResult = this.mapper.map(result)
+      this.logger.log("api",payload);
+      const result = await this.protocolServerService.executeAction(becknUrl.search, payload);
+      const mappedResult = this.mapper.map(result);
       return mappedResult
     } catch (error) {
+      this.logger.error("error executing get_quote",error)
       throw error
     }
   }

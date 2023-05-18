@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable ,Logger} from "@nestjs/common";
 import { DiscoveryMapper } from "../mapper/discovery.mapper";
 import { ProtocolServerService } from "src/shared/providers/protocol-server.provider";
 import { SearchRequestDto } from "../request/search.request.dto";
@@ -11,7 +11,8 @@ export class DiscoveryService {
   constructor(
     private readonly mapper: DiscoveryMapper,
     private readonly protocolServerService: ProtocolServerService,
-    private readonly contextFactory: ContextFactory
+    private readonly contextFactory: ContextFactory,
+    private logger : Logger
   ){}
 
   async search(requestPayload: SearchRequestDto): Promise<any> {
@@ -37,13 +38,13 @@ export class DiscoveryService {
           }
         }
       }
-      console.log(becknUrl.search)
-      console.log(paylaod)
+      this.logger.log("api",paylaod)
       const result = await this.protocolServerService.executeAction(becknUrl.search, paylaod)
       console.log(result)
       const mappedResult = this.mapper.map(result)
       return mappedResult
     } catch (error) {
+      this.logger.error("error executing searching point",error)
       throw error
     }
   }
