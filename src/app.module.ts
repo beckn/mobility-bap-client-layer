@@ -10,6 +10,7 @@ import { AccountsModule } from "./modules/accounts/accounts.module";
 import { DiscoveryModule } from "./modules/discovery/discovery.module";
 import { HttpModule } from "@nestjs/axios";
 
+
 @Module({
   imports: [
     InitModule,
@@ -24,4 +25,5 @@ import { HttpModule } from "@nestjs/axios";
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule  {
+}
