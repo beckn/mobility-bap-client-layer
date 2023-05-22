@@ -25,7 +25,7 @@ export class StatusService {
        order_id:requestPayload.message.order_id
        }
       }
-      this.logger.log("api",payload);
+      this.logger.log("calling status api : payload",payload);
       const result = await this.protocolServerService.executeAction(becknUrl.search, payload)
       const mappedResult = this.mapper.map(result)
       return mappedResult

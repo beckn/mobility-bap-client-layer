@@ -16,7 +16,6 @@ export class DiscoveryService {
   ){}
 
   async search(requestPayload: SearchRequestDto): Promise<any> {
-    console.log("payload...",requestPayload)
     try {
       const context = this.contextFactory.create(ProtocolContextAction.SEARCH)
       const paylaod = {
@@ -38,9 +37,8 @@ export class DiscoveryService {
           }
         }
       }
-      this.logger.log("api",paylaod)
+      this.logger.log("calling search endpoint of protocol server: requestpayload",requestPayload)
       const result = await this.protocolServerService.executeAction(becknUrl.search, paylaod)
-      console.log(result)
       const mappedResult = this.mapper.map(result)
       return mappedResult
     } catch (error) {

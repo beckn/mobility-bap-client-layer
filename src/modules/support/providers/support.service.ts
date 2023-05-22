@@ -25,7 +25,7 @@ export class SupportService {
        ref_id:requestPayload.message.ref_id
        }
       }
-      this.logger.log("api",payload)
+      this.logger.log("calling support api : payload",payload)
       const result = await this.protocolServerService.executeAction(becknUrl.search, payload)
       const mappedResult = this.mapper.map(result)
       return mappedResult

@@ -10,7 +10,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 dotenv.config()
 async function bootstrap() {
-  console.log(process.env.AWS_ACCESS_KEY)
   const app = await NestFactory.create(AppModule,{logger: WinstonModule.createLogger({
     format: winston.format.uncolorize(), //Uncolorize logs as weird character encoding appears when logs are colorized in cloudwatch.
     transports: [
