@@ -7,7 +7,7 @@ import {InitRequestDto } from './request/init.request.dto';
 import { ProtocolContextAction } from 'src/shared/models/protocol-context.dto';
 import { InitService } from './providers/init.service';
 
-@Controller()
+@Controller("client")
 export class InitController {
     constructor(
         private readonly initService: InitService

@@ -18,30 +18,28 @@ export class InitService {
     try {
       const context = this.contextFactory.create(ProtocolContextAction.INIT)
        
-      const item_quantity={
-        count:requestPayload.message.items.length
-    }
-  const item=[{
-    id:requestPayload.message.items[0].id,
-    quantity:item_quantity,
-                    
-  }]
+      context.bpp_id=requestPayload.context.bpp_id
+       context.bpp_uri=requestPayload.context.bpp_uri
+
+       console.log(requestPayload)
       const payload = {
         context: context,
        message:{
         order:{
-           providers:requestPayload.message.items[0].provider,
-           item:item,
-           add_ons:[],
-           offers:[],
-           billing:requestPayload.message.billing_info,
-           fulfillment:requestPayload.message.delivery_info
+          
+          provider:requestPayload.message.order.provider,
+          fulfillment:requestPayload.message.order.fulfillment,
+          items:requestPayload.message.order.items,
+           billing:requestPayload.message.order.billing
+           
 
         },
         
        }
       }
-      const result = await this.protocolServerService.executeAction(becknUrl.search, payload)
+
+      console.log("beck::",payload)
+      const result = await this.protocolServerService.executeAction(becknUrl.init, payload)
       const mappedResult = this.mapper.map(result)
       return mappedResult
     } catch (error) {

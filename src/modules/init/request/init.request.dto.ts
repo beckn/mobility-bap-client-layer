@@ -23,30 +23,27 @@ interface BillingInfo
     name:String,
     email:String
 }
-interface LocationInfo{
-    address:AddressInfo
+
+
+
+interface SelectDescriptor{
+  images:Array<string>,
+  name:String
+ 
 }
-
-interface DeliveryInfo{
-    type:String,
-    phone:String,
-    name:String,
-    email:String,
-    location:LocationInfo
-
-
+interface SelectCatDescriptor{
+  name:String
 }
-
-interface InitRequestMessageDto {
-  items:item[],
-  billing_info:BillingInfo,
-  delivery_info:DeliveryInfo
+interface SelectCategory{
+  descriptor:SelectCatDescriptor,
+  id:String
 }
-
-
 interface SelectProvider{
-    id:String,
+    
     locations:Array<string>
+    descriptor:SelectDescriptor
+    id:String,
+    categories:SelectCategory[]
 }
 interface item{
     id:String,
@@ -54,6 +51,32 @@ interface item{
     provider:SelectProvider
 }
 
-interface SelectCart {
-  items:item[]
+interface item {
+  id:String
+}
+interface SelectPerson{
+  name:String
+}
+
+interface SelectContact{
+  phone:String,
+  email:String
+}
+interface SelectCustomer{
+  person:SelectPerson,
+  contact:SelectContact
+}
+interface SelectFulfillment{
+  customer:SelectCustomer,
+  id:String
+}
+interface InitRequestMessageDto {
+  order:SelectOrder
+}
+
+interface SelectOrder{
+  provider:SelectProvider,
+  fulfillment:SelectFulfillment,
+  items:item[],
+  billing:BillingInfo,
 }

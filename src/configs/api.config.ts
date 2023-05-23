@@ -2,7 +2,8 @@ export const protocolSeverBaseUrl = 'https://experience-bap-client.becknprotocol
 //export const protocolSeverBaseUrl = 'http://localhost:5003'
 export const becknUrl = {
   search: 'search',
-  select:'select'
+  select:'select',
+  init:'init'
 }
 
 export const becknConfig = {
