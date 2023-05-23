@@ -2,7 +2,7 @@
 https://docs.nestjs.com/modules
 */
 
-import { Module } from '@nestjs/common';
+import { Module,Logger } from '@nestjs/common';
 import { SupportController } from './support.controller';
 import { SupportService } from './providers/support.service';
 import { SupportMapper } from './mapper/support.mapper';
@@ -15,6 +15,6 @@ import { UuidFactory } from 'src/shared/factories/uuid.factory.provider';
 @Module({
     imports: [HttpModule],
     controllers: [SupportController],
-    providers: [SupportService, SupportMapper, ProtocolServerService, ContextFactory, UuidFactory],
+    providers: [SupportService, SupportMapper, ProtocolServerService, ContextFactory, UuidFactory,Logger],
 })
 export class SupportModule {}

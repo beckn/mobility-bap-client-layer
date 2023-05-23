@@ -2,7 +2,7 @@
 https://docs.nestjs.com/modules
 */
 
-import { Module } from '@nestjs/common';
+import { Module,Logger } from '@nestjs/common';
 import { TrackController } from './track.controller';
 import { TrackService } from './providers/track.service';
 import { TrackMapper } from './mapper/track.mapper';
@@ -15,6 +15,6 @@ import { UuidFactory } from 'src/shared/factories/uuid.factory.provider';
 @Module({
     imports: [HttpModule],
     controllers: [TrackController],
-    providers: [TrackService, TrackMapper, ProtocolServerService, ContextFactory, UuidFactory],
+    providers: [TrackService, TrackMapper, ProtocolServerService, ContextFactory, UuidFactory,Logger],
 })
 export class TrackModule {}

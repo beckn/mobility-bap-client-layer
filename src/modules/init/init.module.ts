@@ -2,7 +2,7 @@
 https://docs.nestjs.com/modules
 */
 
-import { Module } from '@nestjs/common';
+import { Module,Logger } from '@nestjs/common';
 import { InitController } from './init.controller';
 import { InitService } from './providers/init.service';
 import { InitMapper } from './mapper/init.mapper';
@@ -15,6 +15,6 @@ import { UuidFactory } from 'src/shared/factories/uuid.factory.provider';
 @Module({
     imports: [HttpModule],
     controllers: [InitController],
-    providers: [InitService, InitMapper, ProtocolServerService, ContextFactory, UuidFactory],
+    providers: [InitService, InitMapper, ProtocolServerService, ContextFactory, UuidFactory,Logger],
 })
 export class InitModule {}
