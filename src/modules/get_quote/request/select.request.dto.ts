@@ -7,7 +7,7 @@ export class SelectRequestDto {
 
 
 interface SelectRequestMessageDto {
-  cart: SelectCart
+  order: SelectOrder
 }
 
 
@@ -15,12 +15,24 @@ interface SelectProvider{
     id:String,
     locations:Array<string>
 }
-interface item{
-    id:String,
-    fulfilment_id:String,
-    provider:SelectProvider
+
+interface SelectFulfillment{
+  id:String
+  start:SelectStart,
+  end:SelectEnd,
+}
+interface SelectLocation{
+gps:String
+}
+interface SelectEnd{
+  location:SelectLocation
+}
+interface SelectStart{
+  location:SelectLocation
+}
+interface SelectOrder {
+  provider:SelectProvider,
+  item:[],
+  fulfillment:SelectFulfillment
 }
 
-interface SelectCart {
-  items:item[]
-}

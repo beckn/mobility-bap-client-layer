@@ -13,8 +13,8 @@ export class ContextFactory {
     action: ProtocolContextAction = ProtocolContextAction.SEARCH,
     transactionId: string = this.uuidFactory.create(),
     messageId: string = this.uuidFactory.create(),
-    bppId?: string,
-    bppUri?: string
+    bpp_id?: string,
+    bpp_uri?: string
   ): ProtocolContext {
     const date = new Date()
     return {
@@ -25,8 +25,8 @@ export class ContextFactory {
       core_version: becknConfig.core_version,
       bap_id: becknConfig.bap_id,
       bap_uri: becknConfig.bap_uri,
-     bppId: bppId,
-      bppUri: bppUri,
+      bpp_id: bpp_id,
+      bpp_uri: bpp_uri,
       transaction_id: transactionId,
       message_id: messageId,
       timestamp: date.toDateString()

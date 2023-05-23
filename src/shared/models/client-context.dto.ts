@@ -1,5 +1,5 @@
 export interface ClientContext {
   transactionId?: string
-  bppId?: string
-  bppUri?: string
+  bpp_id?: string
+  bpp_uri?: string
 }

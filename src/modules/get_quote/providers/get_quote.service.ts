@@ -19,25 +19,15 @@ export class GetQuoteService {
     console.log("SELECT:::",requestPayload)
     try {
       const context = this.contextFactory.create(ProtocolContextAction.SELECT)
-        const item_quantity={
-            count:requestPayload[0].message.cart.items.length
-        }
-      const item=[{
-        id:requestPayload[0].message.cart.items[0].id,
-        quantity:item_quantity
-      }]
+       context.bpp_id=requestPayload.context.bpp_id
+       context.bpp_uri=requestPayload.context.bpp_uri
+    
       const payload = {
         context: context,
-       message:{
-        order:{
-            provider:{
-                id:requestPayload[0].message.cart.items[0].id,
-                locations:requestPayload[0].message.cart.items[0].provider.locations
-            },
-            items:item
-        }
-       }
+       message:requestPayload.message
       }
+
+      console.log("Endpoint::",payload)
       const result = await this.protocolServerService.executeAction(becknUrl.select, payload)
       const mappedResult = this.mapper.map(result)
       return mappedResult

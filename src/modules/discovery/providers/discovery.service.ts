@@ -38,7 +38,7 @@ export class DiscoveryService {
         }
       }
       console.log(becknUrl.search)
-      console.log(paylaod)
+      console.log("Transformed",paylaod)
       const result = await this.protocolServerService.executeAction(becknUrl.search, paylaod)
       console.log(result)
       const mappedResult = this.mapper.map(result)

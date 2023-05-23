@@ -6,8 +6,8 @@ export interface ProtocolContext {
   core_version: string
   bap_id?: string
   bap_uri?: string
-  bppId?: string
-  bppUri?: string
+  bpp_id?: string
+  bpp_uri?: string
   transaction_id: string
   message_id: string
   timestamp: string
