@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { TrackMapper } from "../mapper/track.mapper";
 import { ProtocolServerService } from "src/shared/providers/protocol-server.provider";
 import { TrackRequestDto } from "../request/track.request.dto";
@@ -11,7 +11,8 @@ export class TrackService {
   constructor(
     private readonly mapper: TrackMapper,
     private readonly protocolServerService: ProtocolServerService,
-    private readonly contextFactory: ContextFactory
+    private readonly contextFactory: ContextFactory,
+    private logger : Logger
   ){}
 
   async track(requestPayload: TrackRequestDto): Promise<any> {
@@ -24,10 +25,12 @@ export class TrackService {
        order_id:requestPayload.message.order_id
        }
       }
+      this.logger.log("calling track api : payload",payload)
       const result = await this.protocolServerService.executeAction(becknUrl.search, payload)
       const mappedResult = this.mapper.map(result)
       return mappedResult
     } catch (error) {
+      this.logger.error("error executing support call",error)
       throw error
     }
   }
