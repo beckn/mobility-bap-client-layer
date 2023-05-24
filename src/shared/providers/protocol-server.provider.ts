@@ -11,6 +11,7 @@ export class ProtocolServerService {
       const finalUrl = `${protocolSeverBaseUrl}/${url}`
       console.log("EP::",url)
       console.log("URLL",finalUrl)
+      console.log(" Clientpayload:::",payload)
       const result = await this.httpService.post(finalUrl, payload).toPromise()
       return result.data
     } catch (error) {

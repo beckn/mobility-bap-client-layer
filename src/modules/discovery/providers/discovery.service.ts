@@ -38,7 +38,9 @@ export class DiscoveryService {
         }
       }
       this.logger.log("calling search endpoint of protocol server: requestpayload",requestPayload)
+      console.log(paylaod.message.intent.fulfillment)
       const result = await this.protocolServerService.executeAction(becknUrl.search, paylaod)
+      console.log(result)
       const mappedResult = this.mapper.map(result)
       return mappedResult
     } catch (error) {

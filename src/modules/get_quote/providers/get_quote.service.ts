@@ -20,13 +20,18 @@ export class GetQuoteService {
       const context = this.contextFactory.create(ProtocolContextAction.SELECT)
        context.bpp_id=requestPayload.context.bpp_id
        context.bpp_uri=requestPayload.context.bpp_uri
+       context.transaction_id=requestPayload.context.transaction_id
     
       const payload = {
         context: context,
        message:requestPayload.message
       }
       this.logger.log("calling get quote api : payload",payload);
+
+      console.log("Input payload",requestPayload)
       const result = await this.protocolServerService.executeAction(becknUrl.select, payload)
+      console.log(result)
+      console.log(result.responses[0].error)
       const mappedResult = this.mapper.map(result)
       return mappedResult
     } catch (error) {

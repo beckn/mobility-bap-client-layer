@@ -11,7 +11,7 @@ export class ContextFactory {
 
   create(
     action: ProtocolContextAction = ProtocolContextAction.SEARCH,
-    transactionId: string = this.uuidFactory.create(),
+    transactionId: string=this.uuidFactory.create(),
     messageId: string = this.uuidFactory.create(),
     bpp_id?: string,
     bpp_uri?: string

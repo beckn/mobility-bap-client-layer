@@ -20,6 +20,7 @@ export class InitService {
        
       context.bpp_id=requestPayload.context.bpp_id
        context.bpp_uri=requestPayload.context.bpp_uri
+       context.transaction_id=requestPayload.context.transaction_id
 
        console.log(requestPayload)
       const payload = {
