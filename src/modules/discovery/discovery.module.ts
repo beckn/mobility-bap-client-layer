@@ -6,7 +6,6 @@ import { ProtocolServerService } from 'src/shared/providers/protocol-server.prov
 import { ContextFactory } from 'src/shared/factories/context.factory.provider';
 import { HttpModule } from '@nestjs/axios';
 import { UuidFactory } from 'src/shared/factories/uuid.factory.provider';
-import { FirebaseAuthenticationService } from 'src/shared/providers/firebase.provider';
 
 @Module({
   imports: [HttpModule],
