@@ -40,6 +40,8 @@ export class InitService {
 
       console.log("beck::",payload)
       const result = await this.protocolServerService.executeAction(becknUrl.init, payload)
+
+      //console.log("RESULT:::",result.responses[0].message)
       const mappedResult = this.mapper.map(result)
       return mappedResult
     } catch (error) {

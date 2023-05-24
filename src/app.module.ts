@@ -1,9 +1,10 @@
+import { ConfirmModule } from "./modules/confirm/confirm.module";
 import { InitModule } from "./modules/init/init.module";
 import { SupportModule } from "./modules/support/support.module";
 import { TrackModule } from "./modules/track/track.module";
 import { StatusModule } from "./modules/status/status.module";
 import { GetQuoteModule } from "./modules/get_quote/get_quote.module";
-import { Module,Logger } from "@nestjs/common";
+import { Module, Logger } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AccountsModule } from "./modules/accounts/accounts.module";
@@ -12,6 +13,7 @@ import { HttpModule } from "@nestjs/axios";
 
 @Module({
   imports: [
+    ConfirmModule,
     InitModule,
     SupportModule,
     TrackModule,

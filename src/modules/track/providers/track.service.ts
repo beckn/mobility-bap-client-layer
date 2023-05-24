@@ -26,7 +26,7 @@ export class TrackService {
        }
       }
       this.logger.log("calling track api : payload",payload)
-      const result = await this.protocolServerService.executeAction(becknUrl.search, payload)
+      const result = await this.protocolServerService.executeAction(becknUrl.track, payload)
       const mappedResult = this.mapper.map(result)
       return mappedResult
     } catch (error) {

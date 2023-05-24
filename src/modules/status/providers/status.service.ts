@@ -26,7 +26,7 @@ export class StatusService {
        }
       }
       this.logger.log("calling status api : payload",payload);
-      const result = await this.protocolServerService.executeAction(becknUrl.search, payload)
+      const result = await this.protocolServerService.executeAction(becknUrl.status, payload)
       const mappedResult = this.mapper.map(result)
       return mappedResult
     } catch (error) {
