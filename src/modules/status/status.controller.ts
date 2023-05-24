@@ -7,7 +7,7 @@ import { StatusRequestDto } from './request/status.request.dto';
 import { ProtocolContextAction } from 'src/shared/models/protocol-context.dto';
 import { StatusService } from './providers/status.service'
 
-@Controller()
+@Controller('client')
 export class StatusController {
 
     constructor(

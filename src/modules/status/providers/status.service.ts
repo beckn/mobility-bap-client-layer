@@ -18,7 +18,9 @@ export class StatusService {
   async status(requestPayload: StatusRequestDto): Promise<any> {
     try {
       const context = this.contextFactory.create(ProtocolContextAction.STATUS)
-    
+      context.bpp_id=requestPayload.context.bpp_id
+      context.bpp_uri=requestPayload.context.bpp_uri
+      context.transaction_id=requestPayload.context.transaction_id
       const payload = {
         context: context,
        message:{
@@ -26,7 +28,8 @@ export class StatusService {
        }
       }
       this.logger.log("calling status api : payload",payload);
-      const result = await this.protocolServerService.executeAction(becknUrl.search, payload)
+      console.log("Input:::",requestPayload)
+      const result = await this.protocolServerService.executeAction(becknUrl.status, payload)
       const mappedResult = this.mapper.map(result)
       return mappedResult
     } catch (error) {

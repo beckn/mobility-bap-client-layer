@@ -18,15 +18,18 @@ export class TrackService {
   async track(requestPayload: TrackRequestDto): Promise<any> {
     try {
       const context = this.contextFactory.create(ProtocolContextAction.TRACK)
-    
+      context.bpp_id=requestPayload.context.bpp_id
+      context.bpp_uri=requestPayload.context.bpp_uri
+      context.transaction_id=requestPayload.context.transaction_id
       const payload = {
         context: context,
        message:{
        order_id:requestPayload.message.order_id
        }
       }
+      console.log("Input:::",requestPayload)
       this.logger.log("calling track api : payload",payload)
-      const result = await this.protocolServerService.executeAction(becknUrl.search, payload)
+      const result = await this.protocolServerService.executeAction(becknUrl.track, payload)
       const mappedResult = this.mapper.map(result)
       return mappedResult
     } catch (error) {

@@ -7,7 +7,7 @@ import { TrackRequestDto } from './request/track.request.dto';
 import { ProtocolContextAction } from 'src/shared/models/protocol-context.dto';
 import { TrackService } from './providers/track.service'
 
-@Controller()
+@Controller('client')
 export class TrackController {
 
     constructor(

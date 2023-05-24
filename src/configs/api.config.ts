@@ -3,7 +3,10 @@ export const protocolSeverBaseUrl = 'https://experience-bap-client.becknprotocol
 export const becknUrl = {
   search: 'search',
   select:'select',
-  init:'init'
+  init:'init',
+  confirm:'confirm',
+  track:'track',
+  status:'status'
 }
 
 export const becknConfig = {

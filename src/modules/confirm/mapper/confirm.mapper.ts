@@ -1,12 +1,11 @@
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
-export class StatusMapper {
+export class ConfirmMapper {
   map(data: any): any {
     return {
       context: data.context,
-      message:data.responses[0].message
-      
+      message: data
     }
   }
 }

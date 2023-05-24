@@ -8,6 +8,7 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AccountsModule } from "./modules/accounts/accounts.module";
 import { DiscoveryModule } from "./modules/discovery/discovery.module";
+import { ConfirmModule } from "./modules/confirm/confirm.module";
 import { HttpModule } from "@nestjs/axios";
 
 @Module({
@@ -19,6 +20,7 @@ import { HttpModule } from "@nestjs/axios";
     GetQuoteModule,
     AccountsModule,
     DiscoveryModule,
+    ConfirmModule,
     HttpModule,
   ],
   controllers: [AppController],
