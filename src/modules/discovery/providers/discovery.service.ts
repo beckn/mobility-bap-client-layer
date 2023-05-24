@@ -5,6 +5,7 @@ import { SearchRequestDto } from "../request/search.request.dto";
 import { becknUrl } from "src/configs/api.config";
 import { ContextFactory } from 'src/shared/factories/context.factory.provider';
 import { ProtocolContextAction } from "src/shared/models/protocol-context.dto";
+import { FirebaseAuthenticationService } from "src/shared/providers/firebase.provider";
 
 @Injectable()
 export class DiscoveryService {
