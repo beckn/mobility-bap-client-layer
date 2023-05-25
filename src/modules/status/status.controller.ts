@@ -6,7 +6,9 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { StatusRequestDto } from './request/status.request.dto';
 import { ProtocolContextAction } from 'src/shared/models/protocol-context.dto';
 import { StatusService } from './providers/status.service'
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('/v1/status')
 @Controller('client')
 export class StatusController {
 

@@ -6,9 +6,10 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { SupportRequestDto } from './request/support.request.dto';
 import { ProtocolContextAction } from 'src/shared/models/protocol-context.dto';
 import { SupportService } from './providers/support.service';
+import { ApiTags } from '@nestjs/swagger';
 
-
-@Controller('client')
+@ApiTags('/v1/support')
+@Controller()
 export class SupportController {
     constructor(
         private readonly supportService: SupportService
