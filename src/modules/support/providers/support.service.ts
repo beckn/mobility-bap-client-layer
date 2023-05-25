@@ -17,7 +17,7 @@ export class SupportService {
 
   async support(requestPayload: SupportRequestDto): Promise<any> {
     try {
-      const context = this.contextFactory.create(ProtocolContextAction.SELECT)
+      const context = this.contextFactory.create(ProtocolContextAction.SUPPORT)
     
       const payload = {
         context: context,
@@ -26,7 +26,8 @@ export class SupportService {
        }
       }
       this.logger.log("calling support api : payload",payload)
-      const result = await this.protocolServerService.executeAction(becknUrl.search, payload)
+      const result = await this.protocolServerService.executeAction(becknUrl.support, payload)
+      console.log("op",result)
       const mappedResult = this.mapper.map(result)
       return mappedResult
     } catch (error) {

@@ -6,7 +6,10 @@ export const becknUrl = {
   init:'init',
   confirm:'confirm',
   track:'track',
-  status:'status'
+  status:'status',
+  support:'support',
+  rating:'rating',
+  cancel:'cancel'
 }
 
 export const becknConfig = {

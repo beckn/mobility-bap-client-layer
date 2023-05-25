@@ -7,7 +7,7 @@ export class SupportRequestDto {
 
 
 interface SupportRequestMessageDto {
-  uri:String,
+  
   ref_id:String
 }
 

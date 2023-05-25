@@ -8,7 +8,7 @@ import { ProtocolContextAction } from 'src/shared/models/protocol-context.dto';
 import { SupportService } from './providers/support.service';
 
 
-@Controller()
+@Controller('client')
 export class SupportController {
     constructor(
         private readonly supportService: SupportService
