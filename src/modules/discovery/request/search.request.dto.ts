@@ -1,22 +1,57 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { ClientContext } from "src/shared/models/client-context.dto";
 
-export class SearchRequestDto {
-  context: ClientContext
-  message: SearchRequestMessageDto
+
+
+
+
+class SearchCriteria {
+  @ApiProperty({
+    type:String
+  })
+  searchString?: string;
+  @ApiProperty({
+    type:String
+  })
+  deliveryLocation?: string;
+  @ApiProperty({
+    type:String
+  })
+  providerId?: string;
+  @ApiProperty({
+    type:String
+  })
+  categoryId?: string;
+  @ApiProperty({
+    type:String
+  })
+  pickup_location: string;
+  @ApiProperty({
+    type:String
+  })
+  drop_location: string;
+  @ApiProperty({
+    type:String
+  })
+  providerName?: string;
+  @ApiProperty({
+    type:String
+  })
+  categoryName?: string;
 }
-
-
-interface SearchRequestMessageDto {
+class SearchRequestMessageDto {
+  @ApiProperty({
+    type:SearchCriteria
+  })
   criteria: SearchCriteria
 }
-
-interface SearchCriteria {
-  searchString?: string;
-  deliveryLocation?: string;
-  providerId?: string;
-  categoryId?: string;
-  pickup_location: string;
-  drop_location: string;
-  providerName?: string;
-  categoryName?: string;
+export class SearchRequestDto {
+  @ApiProperty({
+    type:ClientContext
+  })
+  context: ClientContext
+  @ApiProperty({
+    type:SearchRequestMessageDto
+  })
+  message: SearchRequestMessageDto
 }

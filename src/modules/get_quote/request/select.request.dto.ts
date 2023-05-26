@@ -1,38 +1,80 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { ClientContext } from "src/shared/models/client-context.dto";
 
-export class SelectRequestDto {
-  context: ClientContext
-  message: SelectRequestMessageDto
+
+class SelectProvider {
+  @ApiProperty({
+    type: String
+  })
+  id: String
+  @ApiProperty({
+    type: [String]
+  })
+  locations: Array<string>
 }
-
-
-interface SelectRequestMessageDto {
+class SelectLocation {
+  @ApiProperty({
+    type: String
+  })
+  gps: String
+}
+class SelectEnd {
+  @ApiProperty({
+    type: SelectLocation
+  })
+  location: SelectLocation
+}
+class SelectStart {
+  @ApiProperty({
+    type: SelectLocation
+  })
+  location: SelectLocation
+}
+class SelectFulfillment {
+  @ApiProperty({
+    type: String
+  })
+  id: String
+  @ApiProperty({
+    type: SelectStart
+  })
+  start: SelectStart
+  @ApiProperty({
+    type: SelectEnd
+  })
+  end: SelectEnd
+}
+class SelectOrder {
+  @ApiProperty({
+    type: SelectProvider
+  })
+  provider: SelectProvider
+  @ApiProperty({
+    type: []
+  })
+  item: []
+  @ApiProperty({
+    type: SelectFulfillment
+  })
+  fulfillment: SelectFulfillment
+}
+class SelectRequestMessageDto {
+  @ApiProperty({
+    type: SelectOrder
+  })
   order: SelectOrder
 }
 
 
-interface SelectProvider{
-    id:String,
-    locations:Array<string>
-}
 
-interface SelectFulfillment{
-  id:String
-  start:SelectStart,
-  end:SelectEnd,
-}
-interface SelectLocation{
-gps:String
-}
-interface SelectEnd{
-  location:SelectLocation
-}
-interface SelectStart{
-  location:SelectLocation
-}
-interface SelectOrder {
-  provider:SelectProvider,
-  item:[],
-  fulfillment:SelectFulfillment
+export class SelectRequestDto {
+  @ApiProperty({
+    type: ClientContext
+  })
+  context: ClientContext
+  @ApiProperty({
+    type: SelectRequestMessageDto
+  })
+  message: SelectRequestMessageDto
 }
 

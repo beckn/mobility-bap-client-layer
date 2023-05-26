@@ -6,7 +6,9 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import {InitRequestDto } from './request/init.request.dto';
 import { ProtocolContextAction } from 'src/shared/models/protocol-context.dto';
 import { InitService } from './providers/init.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('/v1/initialize_order')
 @Controller("client")
 export class InitController {
     constructor(
