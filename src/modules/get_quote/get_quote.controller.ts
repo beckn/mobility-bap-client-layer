@@ -8,7 +8,7 @@ import { ProtocolContextAction } from 'src/shared/models/protocol-context.dto';
 import { GetQuoteService } from './providers/get_quote.service';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('/v1/get_quote')
+@ApiTags('get_quote')
 @Controller('client')
 export class GetQuoteController {
     constructor(

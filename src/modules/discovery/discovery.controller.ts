@@ -4,7 +4,7 @@ import { ProtocolContextAction } from 'src/shared/models/protocol-context.dto';
 import { DiscoveryService } from './providers/discovery.service';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('/v1/search')
+@ApiTags('search')
 @Controller('client')
 export class DiscoveryController {
   constructor(

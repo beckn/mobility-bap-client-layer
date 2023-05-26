@@ -8,7 +8,7 @@ import { ProtocolContextAction } from 'src/shared/models/protocol-context.dto';
 import { InitService } from './providers/init.service';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('/v1/initialize_order')
+@ApiTags('initialize_order')
 @Controller("client")
 export class InitController {
     constructor(
