@@ -1,11 +1,16 @@
+import { ApiProperty } from "@nestjs/swagger"
+
 export class ClientContext {
+  @ApiProperty({
+    type: String
+  })
   transaction_id?: string
   @ApiProperty({
-    description:'bpp_id'
+    type: String
   })
   bpp_id?: string
   @ApiProperty({
-    description:'bpp_uri'
+    type: String
   })
   bpp_uri?: string
 }

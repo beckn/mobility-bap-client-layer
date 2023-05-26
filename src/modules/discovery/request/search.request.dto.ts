@@ -47,7 +47,7 @@ class SearchRequestMessageDto {
 }
 export class SearchRequestDto {
   @ApiProperty({
-    type:ClientContext
+    type:{}
   })
   context: ClientContext
   @ApiProperty({
