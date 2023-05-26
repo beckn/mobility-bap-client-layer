@@ -8,7 +8,7 @@ import { ProtocolContextAction } from 'src/shared/models/protocol-context.dto';
 import { StatusService } from './providers/status.service'
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('/v1/status')
+@ApiTags('status')
 @Controller('client')
 export class StatusController {
 

@@ -8,8 +8,8 @@ import { ProtocolContextAction } from 'src/shared/models/protocol-context.dto';
 import { SupportService } from './providers/support.service';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags('/v1/support')
-@Controller()
+@ApiTags('support')
+@Controller('client')
 export class SupportController {
     constructor(
         private readonly supportService: SupportService

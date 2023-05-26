@@ -8,7 +8,7 @@ import { ProtocolContextAction } from 'src/shared/models/protocol-context.dto';
 import { ConfirmService } from './providers/confirm.service';
 import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags( '/v1/confirm')
+@ApiTags( 'confirm')
 @Controller("client")
 export class ConfirmController {
     constructor(
