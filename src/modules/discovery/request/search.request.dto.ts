@@ -9,11 +9,11 @@ class SearchCriteria {
   @ApiProperty({
     type:String
   })
-  searchString?: string;
+  search_string?: string;
   @ApiProperty({
     type:String
   })
-  deliveryLocation?: string;
+  delivery_location?: string;
   @ApiProperty({
     type:String
   })
@@ -37,7 +37,7 @@ class SearchCriteria {
   @ApiProperty({
     type:String
   })
-  categoryName?: string;
+  category_name?: string;
 }
 class SearchRequestMessageDto {
   @ApiProperty({

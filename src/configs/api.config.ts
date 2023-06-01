@@ -13,7 +13,7 @@ export const becknUrl = {
 }
 
 export const becknConfig = {
-  domain: 'nic2004:60221',
+  domain: 'nic2004:52110',
   country: 'IND',
   city: 'std:080',
   core_version: '0.9.4',
@@ -21,4 +21,10 @@ export const becknConfig = {
   //bap_uri: 'https://experience-center-bap.becknprotocol.io',
   //bap_id: "mobilityreferencebap.becknprotocol.io",
   bap_uri: "https://experience-bap-network.becknprotocol.io",
+}
+
+export enum Domain {
+  mobility = 'mobility',
+  retail = 'retail',
+  tourism = 'tourism'
 }

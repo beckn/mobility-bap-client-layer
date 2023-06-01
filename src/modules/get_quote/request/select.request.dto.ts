@@ -57,12 +57,14 @@ class SelectOrder {
     type: SelectFulfillment
   })
   fulfillment: SelectFulfillment
+
 }
 class SelectRequestMessageDto {
   @ApiProperty({
     type: SelectOrder
   })
   order: SelectOrder
+  cart:any
 }
 
 
