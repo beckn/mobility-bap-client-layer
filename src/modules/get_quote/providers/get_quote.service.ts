@@ -16,54 +16,49 @@ export class GetQuoteService {
     private logger: Logger
   ) {}
 
-  async get(requestPayload:  SelectRequestDto | any): Promise<any> {
+  async get(requestPayload: SelectRequestDto): Promise<any> {
     try {
       let context;
       let payload;
-      let fpayload:any=[]
-      if (requestPayload?.length > 0) {
-        requestPayload.forEach((element) => {
-          context = this.contextFactory.create(
-            ProtocolContextAction.SELECT,
-            element.context.domain
-          );
-          context.bpp_id = element.context.bpp_id;
-          context.bpp_uri = element.context.bpp_uri;
-          context.transaction_id = element.context.transaction_id;
-          let items:any=[];
-        element.message.cart.items.map(item=>{
-         items.push({
-          id: item.id,
-          quantity: item.quantity
-        })})
-         const payload = {
-          context: context,
-          message:
-          {
-            order: {
-              provider: element.message.cart.items[0].provider,
-              items: items
-
-            }
-            }  
-           }
-           fpayload.push(payload);
+      context = this.contextFactory.create(
+        ProtocolContextAction.SELECT,
+        requestPayload.context.domain
+      );
+      context.bpp_id = requestPayload.context.bpp_id;
+      context.bpp_uri = requestPayload.context.bpp_uri;
+      context.transaction_id = requestPayload.context.transaction_id;
+      if (
+        requestPayload.context.domain === Domain.retail ||
+        requestPayload.context.domain === Domain.tourism
+      ) {
+        let items: any = [];
+        requestPayload.message.cart.items.map((item) => {
+          items.push({
+            id: item.id,
+            quantity: item.quantity,
+          });
         });
-       payload = fpayload;
-      }
-      else{
-        context= this.contextFactory.create(ProtocolContextAction.SELECT,requestPayload.context.domain);
-        context.bpp_id = requestPayload.context.bpp_id;
-        context.bpp_uri = requestPayload.context.bpp_uri;
-        context.transaction_id = requestPayload.context.transaction_id;
+        payload = {
+          context: context,
+          message: {
+            order: {
+              provider: {
+                id:requestPayload.message.cart.items[0].provider.id,
+                locations:requestPayload.message.cart.items[0].locations
+              },
+              items: items,
+            },
+          },
+        };
+      } else {
         if (requestPayload.context.domain === Domain.mobility) {
           payload = {
             context: context,
             message: requestPayload.message,
           };
         }
-    }
-  
+      }
+
       this.logger.log("calling get quote api : payload", payload);
 
       console.log("Input payload", requestPayload);

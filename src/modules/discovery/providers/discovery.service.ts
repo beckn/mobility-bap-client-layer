@@ -23,14 +23,14 @@ export class DiscoveryService {
       let additionalPayload
       let fullfillment = {
         start: {
-          location: requestPayload.message.criteria.pickup_location ? {
-            gps: requestPayload.message.criteria.pickup_location
+          location: requestPayload.message.criteria.pickupLocation ? {
+            gps: requestPayload.message.criteria.pickupLocation
           } : {}
 
         },
         end: {
           location: {
-            gps: requestPayload.message.criteria.drop_location || requestPayload.message.criteria.delivery_location
+            gps: requestPayload.message.criteria.dropLocation
           }
         }
 
@@ -41,7 +41,7 @@ export class DiscoveryService {
           fulfillment: fullfillment,
           item: {
             descriptor: {
-              name: requestPayload.message.criteria.search_string
+              name: requestPayload.message.criteria.searchString
             }
           },
           provider: {
@@ -49,7 +49,7 @@ export class DiscoveryService {
           },
           category: {
             descriptor: {
-              name: requestPayload.message.criteria.category_name ? requestPayload.message.criteria.category_name : "tourism"
+              name: requestPayload.message.criteria.categoryName ? requestPayload.message.criteria.categoryName : "tourism"
             }
           }
         }

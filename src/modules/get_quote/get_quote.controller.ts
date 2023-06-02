@@ -19,6 +19,17 @@ export class GetQuoteController {
       
       @Post('/v1/get_quote')
       async get(@Body() selectDto: SelectRequestDto | any): Promise<any> {
-        return await this.getQuoteService.get(selectDto);
+        let resp:any=[];
+        if(selectDto.length>0){
+           selectDto.forEach(async (element) => {
+            const response=   await this.getQuoteService.get(element);
+            resp.push(response)
+            
+          });
+        }else{
+          return await this.getQuoteService.get(selectDto);
+        }
+
+ 
       }
 }
