@@ -16,7 +16,7 @@ export class InitService {
 
   async init(requestPayload: InitRequestDto): Promise<any> {
     try {
-      const context = this.contextFactory.create(ProtocolContextAction.INIT)
+      const context = this.contextFactory.create(ProtocolContextAction.INIT,requestPayload.context.domain)
        
       context.bpp_id=requestPayload.context.bpp_id
        context.bpp_uri=requestPayload.context.bpp_uri

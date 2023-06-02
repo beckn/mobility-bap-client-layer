@@ -13,7 +13,6 @@ export const becknUrl = {
 }
 
 export const becknConfig = {
-  domain: 'nic2004:52110',
   country: 'IND',
   city: 'std:080',
   core_version: '0.9.4',

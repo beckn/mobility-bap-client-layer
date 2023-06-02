@@ -17,7 +17,7 @@ export class ConfirmService {
 
   async confirm(requestPayload: ConfimRequestDto): Promise<any> {
     try {
-      const context = this.contextFactory.create(ProtocolContextAction.CONFIRM)
+      const context = this.contextFactory.create(ProtocolContextAction.CONFIRM,requestPayload.context.domain)
       context.bpp_id=requestPayload.context.bpp_id
        context.bpp_uri=requestPayload.context.bpp_uri
        context.transaction_id=requestPayload.context.transaction_id

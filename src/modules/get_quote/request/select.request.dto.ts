@@ -79,4 +79,7 @@ export class SelectRequestDto {
   })
   message: SelectRequestMessageDto
 }
+export class ListSelectRequestDto{
+  selectRequestDto: SelectRequestDto[]
+}
 

@@ -27,6 +27,7 @@ export class GetQuoteService {
       context.bpp_id = requestPayload.context.bpp_id;
       context.bpp_uri = requestPayload.context.bpp_uri;
       context.transaction_id = requestPayload.context.transaction_id;
+      
       if (
         requestPayload.context.domain === Domain.retail ||
         requestPayload.context.domain === Domain.tourism
@@ -44,7 +45,7 @@ export class GetQuoteService {
             order: {
               provider: {
                 id:requestPayload.message.cart.items[0].provider.id,
-                locations:requestPayload.message.cart.items[0].locations
+                locations: requestPayload.message.cart.items[0].locations
               },
               items: items,
             },
