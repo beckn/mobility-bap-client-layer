@@ -27,6 +27,8 @@ export class GetQuoteService {
       context.bpp_id = requestPayload.context.bpp_id;
       context.bpp_uri = requestPayload.context.bpp_uri;
       context.transaction_id = requestPayload.context.transaction_id;
+      // context.bap_id=requestPayload.context.bap_id,
+      // context.bap_uri=requestPayload.context.bap_uri
       
       if (
         requestPayload.context.domain === Domain.retail ||

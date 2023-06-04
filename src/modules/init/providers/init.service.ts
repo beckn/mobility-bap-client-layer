@@ -5,6 +5,7 @@ import { InitRequestDto } from "../request/init.request.dto";
 import { becknUrl } from "src/configs/api.config";
 import { ContextFactory } from 'src/shared/factories/context.factory.provider';
 import { ProtocolContextAction } from "src/shared/models/protocol-context.dto";
+import { Domain } from "../../../configs/api.config";
 
 @Injectable()
 export class InitService {
@@ -23,22 +24,53 @@ export class InitService {
        context.transaction_id=requestPayload.context.transaction_id
 
        console.log(requestPayload)
-      const payload = {
-        context: context,
-       message:{
-        order:{
+       let payload
+       if( requestPayload.context.domain === Domain.retail ||
+        requestPayload.context.domain === Domain.tourism){
+
+          let items: any = [];
+        requestPayload.message.order.items.map((item) => {
+          items.push({
+            id: item.id,
+            quantity: item.quantity,
+          });
+        });
+          payload = {
+            context: context,
+           message:{
+            order:{
+              
+              provider: {
+                id:requestPayload.message.order.items[0].provider.id,
+                locations: requestPayload.message.order.items[0].locations
+              },
+              items:items,
+              addOns: [],
+              offers: [],
+              billing:requestPayload.message.order.billing,            
+              fulfillment:requestPayload.message.order.fulfillment,
+            }
+            
+           }
+          }
+       }else{
+         payload = {
+          context: context,
+         message:{
+          order:{
+            
+            provider:requestPayload.message.order.provider,
+            fulfillment:requestPayload.message.order.fulfillment,
+            items:requestPayload.message.order.items,
+             billing:requestPayload.message.order.billing
+             
+  
+          },
           
-          provider:requestPayload.message.order.provider,
-          fulfillment:requestPayload.message.order.fulfillment,
-          items:requestPayload.message.order.items,
-           billing:requestPayload.message.order.billing
-           
-
-        },
-        
+         }
+        }
        }
-      }
-
+       
       console.log("beck::",payload)
       const result = await this.protocolServerService.executeAction(becknUrl.init, payload)
       const mappedResult = this.mapper.map(result)

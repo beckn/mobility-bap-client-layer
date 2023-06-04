@@ -17,5 +17,7 @@ export class ClientContext {
   @ApiProperty({
     description:'domain is required'
   })
+  bap_id? :string
+  bap_uri?: string
   domain: Domain
 }
