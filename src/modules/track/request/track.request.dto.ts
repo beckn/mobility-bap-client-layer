@@ -20,7 +20,17 @@ export class TrackRequestDto {
   })
   message:TrackRequestMessageDto
 }
+export class ListTrackRequestDto{
 
+  @ApiProperty({
+
+    type:[TrackRequestDto]
+
+  })
+
+  trackRequestDto:TrackRequestDto[]
+
+}
 
 
 

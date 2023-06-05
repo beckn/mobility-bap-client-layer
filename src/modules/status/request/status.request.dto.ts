@@ -19,7 +19,11 @@ export class StatusRequestDto {
   })
   message: StatusRequestMessageDto
 }
+export class ListStatusRequestDto{
 
+  statusRequestDto:StatusRequestDto[]
+
+}
 
 
 
