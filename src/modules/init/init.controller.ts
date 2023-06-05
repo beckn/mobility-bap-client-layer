@@ -20,7 +20,7 @@ export class InitController {
       @Post('/v1/initialize_order')
       async get(@Body() initDto: ListInitRequestDto): Promise<any> {
 
-        const requests = initDto.listInitRequest.map(initDto => {
+        const requests = initDto.initRequestDto.map(initDto => {
           return this.initService.init(initDto);
         })
          return await Promise.all(requests)

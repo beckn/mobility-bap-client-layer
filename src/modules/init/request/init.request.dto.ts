@@ -228,5 +228,5 @@ export class ListInitRequestDto {
   @ApiProperty({
     type: [InitRequestDto]
   })
-  listInitRequest: InitRequestDto[]
+  initRequestDto: InitRequestDto[]
 }
