@@ -1,8 +1,21 @@
 import { ApiProperty, ApiTags } from "@nestjs/swagger";
 import { ClientContext } from "src/shared/models/client-context.dto";
+import { IsEnum } from 'class-validator';
 
 
+enum Status {
+  PAID = 'PAID',
+  NOT_PAID = 'NOT-PAID',
 
+}
+
+ enum PaymentType {
+  ON_ORDER = 'ON-ORDER',
+  PRE_FULFILLMENT = 'PRE-FULFILLMENT',
+  ON_FULFILLMENT='ON-FULFILLMENT',
+  POST_FULFILLMENT="POST-FULFILLMENT"
+
+}
 class AddressInfo {
   @ApiProperty({
     type:String
@@ -41,11 +54,16 @@ class SelectPaymentParams {
   @ApiProperty({
     type:String
   })
+  transactionId: String
+
+  @ApiProperty({
+    type:String
+  })
   amount: String
   @ApiProperty({
     type:String
   })
-  curreny: String
+  currency: String
   @ApiProperty({
     type:String
   })
@@ -59,11 +77,14 @@ class SelectPayment {
   @ApiProperty({
     type:String
   })
-  type: String
+  @IsEnum(PaymentType)
+  type:PaymentType
   @ApiProperty({
     type:SelectPaymentParams
   })
   params: SelectPaymentParams
+  @IsEnum(Status)
+  status:Status
 }
 
 class BillingInfo {
@@ -137,5 +158,12 @@ export class ListConfirmRequestDto{
   @ApiProperty({
     type:[ConfimRequestDto]
   })
-  listConfirmRequest: ConfimRequestDto[]
+  confirmRequestDto: ConfimRequestDto[]
 }
+
+
+
+
+
+
+

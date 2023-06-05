@@ -47,8 +47,8 @@ export class ConfirmService {
           message: {
             order: {
               provider: {
-                id:requestPayload.message.order.items[0].provider.id,
-                locations: requestPayload.message.order.items[0].locations
+                id:requestPayload.message.order.provider.id,
+                //locations: requestPayload.message.order.locations
               },
               items:items,
               addOns: [],
@@ -86,7 +86,7 @@ export class ConfirmService {
       const mappedResult = this.mapper.map(result);
       return mappedResult;
     } catch (error) {
-      this.logger.error("error executing searching point", error);
+      this.logger.error("error executing confirm endpoint", error);
       throw error;
     }
   }
