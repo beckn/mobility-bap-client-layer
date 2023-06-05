@@ -17,7 +17,7 @@ export class SupportService {
 
   async support(requestPayload: SupportRequestDto): Promise<any> {
     try {
-      const context = this.contextFactory.create(ProtocolContextAction.SUPPORT)
+      const context = this.contextFactory.create(ProtocolContextAction.SUPPORT,requestPayload.context.domain)
     
       const payload = {
         context: context,

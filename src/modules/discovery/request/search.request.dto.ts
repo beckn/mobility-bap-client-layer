@@ -13,10 +13,6 @@ class SearchCriteria {
   @ApiProperty({
     type:String
   })
-  deliveryLocation?: string;
-  @ApiProperty({
-    type:String
-  })
   providerId?: string;
   @ApiProperty({
     type:String
@@ -25,11 +21,11 @@ class SearchCriteria {
   @ApiProperty({
     type:String
   })
-  pickup_location: string;
+  pickupLocation: string;
   @ApiProperty({
     type:String
   })
-  drop_location: string;
+  dropLocation: string;
   @ApiProperty({
     type:String
   })

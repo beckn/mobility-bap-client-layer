@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger"
+import { Domain } from "../../configs/api.config"
 
 export class ClientContext {
   @ApiProperty({
@@ -13,4 +14,10 @@ export class ClientContext {
     type: String
   })
   bpp_uri?: string
+  @ApiProperty({
+    description:'domain is required'
+  })
+  bap_id? :string
+  bap_uri?: string
+  domain: Domain
 }

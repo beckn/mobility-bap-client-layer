@@ -132,3 +132,10 @@ export class ConfimRequestDto {
   })
   message: ConfirmRequestMessageDto
 }
+
+export class ListConfirmRequestDto{
+  @ApiProperty({
+    type:[ConfimRequestDto]
+  })
+  listConfirmRequest: ConfimRequestDto[]
+}

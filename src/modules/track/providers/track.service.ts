@@ -17,7 +17,7 @@ export class TrackService {
 
   async track(requestPayload: TrackRequestDto): Promise<any> {
     try {
-      const context = this.contextFactory.create(ProtocolContextAction.TRACK)
+      const context = this.contextFactory.create(ProtocolContextAction.TRACK,requestPayload.context.domain)
       context.bpp_id=requestPayload.context.bpp_id
       context.bpp_uri=requestPayload.context.bpp_uri
       context.transaction_id=requestPayload.context.transaction_id

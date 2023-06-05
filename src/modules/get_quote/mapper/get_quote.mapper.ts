@@ -6,7 +6,7 @@ export class GetQuoteMapper {
     return {
       context: data.context,
       message: {
-        catalogs: data.responses[0].message
+        catalogs: data?.responses[0]?.message
       }
     }
   }
