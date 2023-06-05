@@ -35,20 +35,23 @@ export class GetQuoteService {
         requestPayload.context.domain === Domain.tourism
       ) {
         let items: any = [];
-        requestPayload.message.cart.items.map((item) => {
+        
+        requestPayload.message.order.items.map((item) => {
           items.push({
             id: item.id,
             quantity: item.quantity,
           });
+       
         });
         payload = {
           context: context,
           message: {
             order: {
               provider: {
-                id:requestPayload.message.cart.items[0].provider.id,
-                locations: requestPayload.message.cart.items[0].locations
+                id:requestPayload.message.order.provider.id,
+                locations:requestPayload.message.order.locations
               },
+              
               items: items,
             },
           },

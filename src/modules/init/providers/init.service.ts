@@ -44,8 +44,8 @@ export class InitService {
           message: {
             order: {
               provider: {
-                id: requestPayload.message.order.items[0].provider.id,
-                locations: requestPayload.message.order.items[0].locations,
+                id: requestPayload.message.order.provider.id,
+                locations: requestPayload.message.order.provider.locations,
               },
               items: items,
               addOns: [],
