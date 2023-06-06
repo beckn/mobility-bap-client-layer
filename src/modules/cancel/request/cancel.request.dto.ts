@@ -23,6 +23,12 @@ export class CancelRequestDto {
   })
   message: CancelRequestMessageDto
 }
+export class ListCancelRequestDto{
+  @ApiProperty({
+    type:[CancelRequestDto]
+  })
+  cancelRequestDto: CancelRequestDto[]
+}
 
 
 

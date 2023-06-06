@@ -22,7 +22,7 @@ export class RatingService {
       context.bpp_uri=requestPayload.context.bpp_uri
       context.transaction_id=requestPayload.context.transaction_id
       const payload = {
-        context: context,
+       context: context,
        message:{
        id:requestPayload.message.id,
        rating_category:requestPayload.message.rating_category,

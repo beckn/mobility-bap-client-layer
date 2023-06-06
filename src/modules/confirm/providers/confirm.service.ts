@@ -1,12 +1,14 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfirmMapper } from "../mapper/confirm.mapper";
 import { ProtocolServerService } from "src/shared/providers/protocol-server.provider";
-import { ConfimRequestDto } from "../request/confirm.request.dto";
+import { ConfimRequestDto, SelectPayment } from "../request/confirm.request.dto";
 import { becknUrl } from "src/configs/api.config";
 import { ContextFactory } from "src/shared/factories/context.factory.provider";
 import { ProtocolContextAction } from "src/shared/models/protocol-context.dto";
 import { Domain } from "../../../configs/api.config";
-
+import { IsEnum, validateSync } from 'class-validator';
+import { plainToClass } from 'class-transformer';
+import { error } from "console";
 @Injectable()
 export class ConfirmService {
   constructor(
@@ -31,6 +33,13 @@ export class ConfirmService {
         requestPayload.context.domain === Domain.retail ||
         requestPayload.context.domain === Domain.tourism
       ) {
+
+        const payment = plainToClass(SelectPayment, requestPayload.message.order.payment);
+        const validationErrors = validateSync(payment);
+        if(validationErrors.length>0){
+         throw validationErrors
+        }
+
         let items: any = [];
         requestPayload.message.order.items.map((item) => {
           items.push({

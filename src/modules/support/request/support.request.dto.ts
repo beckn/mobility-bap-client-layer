@@ -23,5 +23,12 @@ export class SupportRequestDto {
   message: SupportRequestMessageDto
 }
 
+export class ListSupportRequestDto{
+  @ApiProperty({
+    type:[SupportRequestDto]
+  })
+  supportRequestDto: SupportRequestDto[]
+}
+
 
 
