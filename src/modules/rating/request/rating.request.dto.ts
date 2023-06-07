@@ -28,6 +28,13 @@ export class RatingRequestDto {
   message: RatingRequestMessageDto
 }
 
+export class ListRatingRequestDto{
+  @ApiProperty({
+    type: [RatingRequestDto]
+  })
+  ratingRequestDto: RatingRequestDto[]
+}
+
 
 
 

@@ -3,13 +3,13 @@ import { ClientContext } from "src/shared/models/client-context.dto";
 import { IsEnum } from 'class-validator';
 
 
-enum Status {
+export enum Status {
   PAID = 'PAID',
   NOT_PAID = 'NOT-PAID',
 
 }
 
- enum PaymentType {
+ export enum PaymentType {
   ON_ORDER = 'ON-ORDER',
   PRE_FULFILLMENT = 'PRE-FULFILLMENT',
   ON_FULFILLMENT='ON-FULFILLMENT',
@@ -69,7 +69,7 @@ class SelectPaymentParams {
   })
   transaction_status: String
 }
-class SelectPayment {
+export class SelectPayment {
   @ApiProperty({
     type:String
   })

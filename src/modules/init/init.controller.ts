@@ -17,7 +17,7 @@ export class InitController {
     
       }
       
-      @Post('/v1/initialize_order')
+      @Post('/v2/initialize_order')
       async get(@Body() initDto: ListInitRequestDto): Promise<any> {
 
         const requests = initDto.initRequestDto.map(initDto => {

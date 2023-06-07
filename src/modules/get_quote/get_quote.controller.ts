@@ -17,7 +17,7 @@ export class GetQuoteController {
     
       }
       
-      @Post('/v1/get_quote')
+      @Post('/v2/get_quote')
       async get(@Body() selectDto: ListSelectRequestDto): Promise<any> {
         const requests = selectDto.selectRequestDto.map(selectDto => {
           return this.getQuoteService.get(selectDto);

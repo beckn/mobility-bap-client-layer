@@ -17,7 +17,7 @@ export class TrackController {
     
       }
       
-      @Post('/v1/track')
+      @Post('/v2/track')
 
       async track(@Body() trackDto: ListTrackRequestDto): Promise<any> {
 
