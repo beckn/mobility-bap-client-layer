@@ -15,7 +15,7 @@ export class SupportController {
         private readonly supportService: SupportService
       ) {
     
-      }li
+      }
       
       @Post('/v2/support')
       async support(@Body() supportDto: ListSupportRequestDto): Promise<any> {
