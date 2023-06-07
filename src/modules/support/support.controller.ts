@@ -17,7 +17,7 @@ export class SupportController {
     
       }li
       
-      @Post('/v1/support')
+      @Post('/v2/support')
       async support(@Body() supportDto: ListSupportRequestDto): Promise<any> {
         const requests = supportDto.supportRequestDto.map((supportDto) => {
           return this.supportService.support(supportDto);

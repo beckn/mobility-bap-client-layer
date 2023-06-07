@@ -19,7 +19,7 @@ export class StatusController {
     
       }
       
-      @Post('/v1/status')
+      @Post('/v2/status')
 
       async status(@Body() statusDto: ListStatusRequestDto): Promise<any> {
 

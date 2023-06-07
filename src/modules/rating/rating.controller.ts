@@ -17,7 +17,7 @@ export class RatingController {
     
       }
       
-      @Post('/v1/rating')
+      @Post('/v2/rating')
       async status(@Body() ratingDto: ListRatingRequestDto): Promise<any> {
         const requests = ratingDto.ratingRequestDto.map((ratingDto) => {
           return this.ratingService.rating(ratingDto);

@@ -15,7 +15,7 @@ import { ApiTags } from "@nestjs/swagger";
 export class CancelController {
   constructor(private readonly cancelService: CancelService) {}
 
-  @Post("/v1/cancel")
+  @Post("/v2/cancel")
   async status(@Body() cancelDto: ListCancelRequestDto): Promise<any> {
     const requests = cancelDto.cancelRequestDto.map((cancelDto) => {
       return this.cancelService.cancel(cancelDto);
