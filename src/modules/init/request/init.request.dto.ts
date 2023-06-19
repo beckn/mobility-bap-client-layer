@@ -91,7 +91,7 @@ class SelectProvider {
   @ApiProperty({
     type: [String]
   })
-  locations: Array<string>;
+  locations: Array<string> ;
   @ApiProperty({
     type: SelectDescriptor
   })
@@ -104,6 +104,26 @@ class SelectProvider {
     type: [SelectCategory]
   })
   categories: SelectCategory[];
+}
+class Count{
+  @ApiProperty({
+    type: Number
+  })
+  count:number
+}
+class Quantity{
+  @ApiProperty({
+    type: String
+  })
+  id:string;
+  @ApiProperty({
+    type: String
+  })
+  @ApiProperty({
+    type: Count
+  })
+  quantity:Count;
+
 }
 class item {
   @ApiProperty({
@@ -118,6 +138,14 @@ class item {
     type: SelectProvider
   })
   provider: SelectProvider
+  @ApiProperty({
+    type: Quantity
+  })
+  quantity: Quantity
+  @ApiProperty({
+    type: []
+  })
+  locations:Array<any>
 }
 
 // class item {
@@ -195,4 +223,10 @@ export class InitRequestDto {
     type: InitRequestMessageDto
   })
   message: InitRequestMessageDto;
+}
+export class ListInitRequestDto {
+  @ApiProperty({
+    type: [InitRequestDto]
+  })
+  initRequestDto: InitRequestDto[]
 }

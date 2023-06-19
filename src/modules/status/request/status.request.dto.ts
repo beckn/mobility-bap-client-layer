@@ -18,8 +18,13 @@ export class StatusRequestDto {
     type:StatusRequestMessageDto
   })
   message: StatusRequestMessageDto
+  order_object:any
 }
+export class ListStatusRequestDto{
 
+  statusRequestDto:StatusRequestDto[]
+
+}
 
 
 

@@ -10,11 +10,12 @@ import { ProtocolServerService } from 'src/shared/providers/protocol-server.prov
 import { ContextFactory } from 'src/shared/factories/context.factory.provider';
 import { HttpModule } from '@nestjs/axios';
 import { UuidFactory } from 'src/shared/factories/uuid.factory.provider';
+import{FileUploadService} from "src/shared/providers/file-upload.provider"
 
 
 @Module({
     imports: [HttpModule],
     controllers: [StatusController],
-    providers: [StatusService, StatusMapper, ProtocolServerService, ContextFactory, UuidFactory,Logger],
+    providers: [StatusService, FileUploadService,StatusMapper, ProtocolServerService, ContextFactory, UuidFactory,Logger],
 })
 export class StatusModule {}

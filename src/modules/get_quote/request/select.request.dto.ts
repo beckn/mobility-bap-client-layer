@@ -44,6 +44,13 @@ class SelectFulfillment {
   })
   end: SelectEnd
 }
+class SelectCount{
+  count:Number
+}
+class SelectItem{
+  id:String
+  quantity:SelectCount
+}
 class SelectOrder {
   @ApiProperty({
     type: SelectProvider
@@ -52,18 +59,21 @@ class SelectOrder {
   @ApiProperty({
     type: []
   })
-  item: []
+  items: SelectItem[]
   @ApiProperty({
     type: SelectFulfillment
   })
   fulfillment: SelectFulfillment
+
 }
 class SelectRequestMessageDto {
   @ApiProperty({
     type: SelectOrder
   })
-  order: SelectOrder
+  order: any
+  cart:any
 }
+
 
 
 
@@ -76,5 +86,8 @@ export class SelectRequestDto {
     type: SelectRequestMessageDto
   })
   message: SelectRequestMessageDto
+}
+export class ListSelectRequestDto{
+  selectRequestDto: SelectRequestDto[]
 }
 

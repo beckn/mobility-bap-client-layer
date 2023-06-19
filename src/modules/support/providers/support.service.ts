@@ -17,8 +17,10 @@ export class SupportService {
 
   async support(requestPayload: SupportRequestDto): Promise<any> {
     try {
-      const context = this.contextFactory.create(ProtocolContextAction.SUPPORT)
-    
+      const context = this.contextFactory.create(ProtocolContextAction.SUPPORT,requestPayload.context.domain)
+      context.bpp_id=requestPayload.context.bpp_id
+      context.bpp_uri=requestPayload.context.bpp_uri
+      context.transaction_id=requestPayload.context.transaction_id
       const payload = {
         context: context,
        message:{

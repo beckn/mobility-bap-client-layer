@@ -8,6 +8,7 @@ import * as winston from 'winston';
 import * as CloudWatchTransport from 'winston-cloudwatch';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import { ValidationPipe } from '@nestjs/common/pipes';
 dotenv.config()
 async function bootstrap() {
   const app = await NestFactory.create(AppModule,{logger: WinstonModule.createLogger({
@@ -40,6 +41,7 @@ async function bootstrap() {
     ],
   }),
 });
+app.useGlobalPipes(new ValidationPipe());
 const config = new DocumentBuilder()
 .setTitle('BAP Client layer')
 .setDescription('APIs on bap client layer')
