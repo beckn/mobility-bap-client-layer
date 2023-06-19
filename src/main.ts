@@ -4,6 +4,7 @@ import {
   utilities as nestWinstonModuleUtilities,
   WinstonModule,
 } from 'nest-winston';
+
 import * as winston from 'winston';
 import * as CloudWatchTransport from 'winston-cloudwatch';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
@@ -40,7 +41,9 @@ async function bootstrap() {
       }),
     ],
   }),
+  cors:true
 });
+
 app.useGlobalPipes(new ValidationPipe());
 const config = new DocumentBuilder()
 .setTitle('BAP Client layer')
