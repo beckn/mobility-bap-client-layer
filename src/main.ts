@@ -41,13 +41,14 @@ async function bootstrap() {
       }),
     ],
   }),
+  cors:true
 });
-app.use(cors({
-  origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
+// app.use(cors({
+//   origin: '*',
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true,
 
-}));
+// }));
 app.useGlobalPipes(new ValidationPipe());
 const config = new DocumentBuilder()
 .setTitle('BAP Client layer')
