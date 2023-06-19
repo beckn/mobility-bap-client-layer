@@ -4,7 +4,7 @@ import {
   utilities as nestWinstonModuleUtilities,
   WinstonModule,
 } from 'nest-winston';
-import * as cors from 'cors';
+
 import * as winston from 'winston';
 import * as CloudWatchTransport from 'winston-cloudwatch';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
