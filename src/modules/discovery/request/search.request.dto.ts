@@ -3,7 +3,12 @@ import { ClientContext } from "src/shared/models/client-context.dto";
 
 
 
-
+class SearchProvider {
+  @ApiProperty({
+    type: String
+  })
+  id?: string
+}
 
 class SearchCriteria {
   @ApiProperty({
@@ -11,9 +16,9 @@ class SearchCriteria {
   })
   searchString?: string;
   @ApiProperty({
-    type:String
+    type: SearchProvider
   })
-  providerId?: string;
+  provider?: SearchProvider;
   @ApiProperty({
     type:String
   })
