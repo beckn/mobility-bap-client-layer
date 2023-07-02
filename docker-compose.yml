@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  mongoDB:
+    image: 'mongo'
+    container_name: 'client-layer'
+    restart: always
+    command: mongod
+    environment:
+      MONGO_INITDB_DATABASE: 'beckn'
+      MONGO_INITDB_ROOT_USERNAME: 'root'
+      MONGO_INITDB_ROOT_PASSWORD: 'beckn@123'
+    ports:
+      - '27017:27017'

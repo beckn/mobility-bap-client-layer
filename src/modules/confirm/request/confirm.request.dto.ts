@@ -159,6 +159,11 @@ export class ListConfirmRequestDto{
     type:[ConfimRequestDto]
   })
   confirmRequestDto: ConfimRequestDto[]
+
+  @ApiProperty({
+    type: String
+  })
+  userId: string
 }
 
 
