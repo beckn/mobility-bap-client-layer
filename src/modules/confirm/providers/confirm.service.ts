@@ -8,17 +8,23 @@ import { ProtocolContextAction } from "src/shared/models/protocol-context.dto";
 import { Domain } from "../../../configs/api.config";
 import { IsEnum, validateSync } from 'class-validator';
 import { plainToClass } from 'class-transformer';
-import { error } from "console";
+import { Order } from "src/modules/order/models/order.schema";
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { UuidFactory } from "src/shared/factories/uuid.factory.provider";
+
 @Injectable()
 export class ConfirmService {
   constructor(
     private readonly mapper: ConfirmMapper,
     private readonly protocolServerService: ProtocolServerService,
     private readonly contextFactory: ContextFactory,
-    private logger: Logger
+    private logger: Logger,
+    @InjectModel(Order.name) private orderModel: Model<Order>,
+    private readonly uuidFactory: UuidFactory
   ) {}
 
-  async confirm(requestPayload: ConfimRequestDto): Promise<any> {
+  async confirm(requestPayload: ConfimRequestDto, userId: string): Promise<any> {
     try {
       const context = this.contextFactory.create(
         ProtocolContextAction.CONFIRM,
@@ -92,11 +98,21 @@ export class ConfirmService {
         becknUrl.confirm,
         paylaod
       );
+      await this.storeOrder(result.responses, userId)
       const mappedResult = this.mapper.map(result);
       return mappedResult;
     } catch (error) {
       this.logger.error("error executing confirm endpoint", error);
       throw error;
     }
+  }
+
+  async storeOrder(order: any, userId: string) {
+    const createdCat = new this.orderModel({
+      userId: userId,
+      parentOrderId: this.uuidFactory.create(),
+      orders: order
+    });
+    return createdCat.save();
   }
 }

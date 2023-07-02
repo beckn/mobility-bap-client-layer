@@ -20,7 +20,7 @@ export class ConfirmController {
       @Post('/v2/confirm')
       async get(@Body() listConfirmDto: ListConfirmRequestDto): Promise<any> {
         const requests = listConfirmDto.confirmRequestDto.map(confirmDto => {
-         return this.confirmService.confirm(confirmDto);
+         return this.confirmService.confirm(confirmDto, listConfirmDto.userId);
         })
          return await Promise.all(requests)
       }

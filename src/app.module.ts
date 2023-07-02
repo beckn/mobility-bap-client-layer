@@ -10,6 +10,8 @@ import { AccountsModule } from "./modules/accounts/accounts.module";
 import { DiscoveryModule } from "./modules/discovery/discovery.module";
 import { ConfirmModule } from "./modules/confirm/confirm.module";
 import { HttpModule } from "@nestjs/axios";
+import { MongooseModule } from '@nestjs/mongoose';
+import { OrderModule } from "./modules/order/order.module";
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { HttpModule } from "@nestjs/axios";
     DiscoveryModule,
     ConfirmModule,
     HttpModule,
+    OrderModule,
+    MongooseModule.forRoot('mongodb://root:beckn%40123@localhost/beckn?authSource=admin'),
   ],
   controllers: [],
   providers: [],

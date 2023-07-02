@@ -6,9 +6,11 @@ import { ProtocolServerService } from 'src/shared/providers/protocol-server.prov
 import { ContextFactory } from 'src/shared/factories/context.factory.provider';
 import { HttpModule } from '@nestjs/axios';
 import { UuidFactory } from 'src/shared/factories/uuid.factory.provider';
+import { Order, OrderSchema } from '../order/models/order.schema';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [HttpModule],
+  imports: [HttpModule, MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }])],
   controllers: [ConfirmController],
   providers: [ConfirmService, ConfirmMapper, ProtocolServerService, ContextFactory, UuidFactory,Logger]
 })
