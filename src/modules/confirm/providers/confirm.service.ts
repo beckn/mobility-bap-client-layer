@@ -19,12 +19,10 @@ export class ConfirmService {
     private readonly mapper: ConfirmMapper,
     private readonly protocolServerService: ProtocolServerService,
     private readonly contextFactory: ContextFactory,
-    private logger: Logger,
-    @InjectModel(Order.name) private orderModel: Model<Order>,
-    private readonly uuidFactory: UuidFactory
+    private logger: Logger
   ) {}
 
-  async confirm(requestPayload: ConfimRequestDto, userId: string): Promise<any> {
+  async confirm(requestPayload: ConfimRequestDto): Promise<any> {
     try {
       const context = this.contextFactory.create(
         ProtocolContextAction.CONFIRM,
@@ -98,21 +96,12 @@ export class ConfirmService {
         becknUrl.confirm,
         paylaod
       );
-      await this.storeOrder(result.responses, userId)
+      
       const mappedResult = this.mapper.map(result);
       return mappedResult;
     } catch (error) {
       this.logger.error("error executing confirm endpoint", error);
       throw error;
     }
-  }
-
-  async storeOrder(order: any, userId: string) {
-    const createdCat = new this.orderModel({
-      userId: userId,
-      parentOrderId: this.uuidFactory.create(),
-      orders: order
-    });
-    return createdCat.save();
   }
 }
