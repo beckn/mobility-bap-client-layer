@@ -109,7 +109,34 @@ export class ConfirmService {
         result.responses.map(async (value) => {
           const id = value.message.order.id;
 
-          const displayId = this.uuidFactory.create();
+          const order = await this.orderIdModel.findOne({
+            actualOrderId:id 
+          }).exec()
+
+          if(order){
+            return {
+              ...value,
+              message: {
+                ...value.message,
+                order: {
+                  ...value.message.order,
+                  displayId: order.displayOrderId,
+                },
+              },
+            };
+          }
+          function generateNumericID() {
+            const characters = '0123456789';
+            let id = '';
+          
+            for (let i = 0; i < 6; i++) {
+              const randomIndex = Math.floor(Math.random() * characters.length);
+              id += characters[randomIndex];
+            }
+          
+            return id;
+          }
+          const displayId = generateNumericID()
           const displyOrder = new this.orderIdModel({
             actualOrderId: id,
             displayOrderId: displayId,
