@@ -12,6 +12,7 @@ export class OrderService {
 
   async fetchOrders(userId: string): Promise<any> {
     try {
+      
       return this.orderModel.find({
         userId: userId
       }).exec();

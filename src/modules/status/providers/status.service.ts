@@ -6,6 +6,11 @@ import { becknUrl } from "src/configs/api.config";
 import { ContextFactory } from 'src/shared/factories/context.factory.provider';
 import { ProtocolContextAction } from "src/shared/models/protocol-context.dto";
 import{FileUploadService} from "src/shared/providers/file-upload.provider"
+import { OrderId } from "src/shared/models/order-id.schema";
+import { InjectModel } from "@nestjs/mongoose";
+import { UuidFactory } from "src/shared/factories/uuid.factory.provider";
+import { Model } from "mongoose";
+
 
 
 @Injectable()
@@ -15,7 +20,9 @@ export class StatusService {
     private readonly protocolServerService: ProtocolServerService,
     private readonly contextFactory: ContextFactory,
     private readonly fileuploadService: FileUploadService,
-    private logger : Logger
+    private logger : Logger,
+    private readonly uuidFactory: UuidFactory,
+    @InjectModel(OrderId.name) private orderIdModel: Model<OrderId>
   ){}
 
   async status(requestPayload: StatusRequestDto): Promise<any> {
@@ -34,20 +41,60 @@ export class StatusService {
       }
       this.logger.log("calling status api : payload",payload);
       console.log("Input:::",requestPayload)
+     
       const result = await this.protocolServerService.executeAction(becknUrl.status, payload)
+     
+      
+
+      
 
       if((requestPayload.context.domain.trim().toLowerCase()==='tourism')&&requestPayload.order_object){
         const qr_code = await this.fileuploadService.fileUpload(requestPayload.order_object)
         result.responses[0].qr_url=qr_code
-        const mappedResult = this.mapper.map(result)
-      return mappedResult
+    
       }
+      const statusResponse = await Promise.all(
+        result.responses.map(async (value) => {
+          const id = value.message.order.id;
+          const fetchOrder=await this.fetchOrderId(id)
+          
 
-      const mappedResult = this.mapper.map(result)
+          return {
+            ...value,
+            message: {
+              ...value.message,
+              order: {
+                ...value.message.order,
+                displayId: fetchOrder[0].displayOrderId,
+              },
+            },
+          };
+        })
+      );
+      console.log("res",result)
+      console.log("status",statusResponse)
+
+      console.log("status_qr",statusResponse)
+    
+      const mappedResult = this.mapper.map({
+        ...result,
+        responses: statusResponse,
+      });
       return mappedResult
     } catch (error) {
       this.logger.error("error executing status call",error)
       throw error
+    }
+  }
+  async fetchOrderId(orderId: String): Promise<any> {
+    try {
+   
+      return this.orderIdModel.find({
+        actualOrderId:orderId 
+      }).exec();
+    } catch (error) {
+      this.logger.error("error fetching orders", error);
+      throw error;
     }
   }
 }
