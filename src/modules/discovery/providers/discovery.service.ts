@@ -45,7 +45,8 @@ export class DiscoveryService {
             }
           },
           provider: {
-            descriptor: {}
+            descriptor: {},
+            id: requestPayload.message.criteria?.providerId
           },
           category: {
             descriptor: {

@@ -7,7 +7,6 @@ export class StatusMapper {
       context: data.context,
       message:data.responses[0].message,
       qr_url:data.responses[0].qr_url
-
       
     }
   }

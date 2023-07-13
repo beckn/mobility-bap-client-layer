@@ -1,17 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { ClientContext } from "src/shared/models/client-context.dto";
 
-
-
-
-
 class SearchCriteria {
   @ApiProperty({
     type:String
   })
   searchString?: string;
   @ApiProperty({
-    type:String
+    type: String
   })
   providerId?: string;
   @ApiProperty({

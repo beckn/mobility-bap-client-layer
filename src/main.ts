@@ -26,7 +26,7 @@ async function bootstrap() {
         retentionInDays:30,
         jsonMessage:true,
         name: "Cloudwatch Logs",
-        logGroupName: process.env.CLOUDWATCH_GROUP_NAME,
+        logGroupName: `${process.env.CLOUDWATCH_GROUP_NAME}/${process.env.STAGE}`,
         logStreamName: process.env.CLOUDWATCH_STREAM_NAME,
         awsAccessKeyId: process.env.AWS_ACCESS_KEY,
         awsSecretKey: process.env.AWS_KEY_SECRET,

@@ -1,21 +1,30 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { ConfirmMapper } from "../mapper/confirm.mapper";
 import { ProtocolServerService } from "src/shared/providers/protocol-server.provider";
-import { ConfimRequestDto, SelectPayment } from "../request/confirm.request.dto";
+import {
+  ConfimRequestDto,
+  SelectPayment,
+} from "../request/confirm.request.dto";
 import { becknUrl } from "src/configs/api.config";
 import { ContextFactory } from "src/shared/factories/context.factory.provider";
 import { ProtocolContextAction } from "src/shared/models/protocol-context.dto";
 import { Domain } from "../../../configs/api.config";
-import { IsEnum, validateSync } from 'class-validator';
-import { plainToClass } from 'class-transformer';
-import { error } from "console";
+import { IsEnum, validateSync } from "class-validator";
+import { plainToClass } from "class-transformer";
+import { OrderId } from "src/shared/models/order-id.schema";
+import { Model } from "mongoose";
+import { InjectModel } from "@nestjs/mongoose";
+import { UuidFactory } from "src/shared/factories/uuid.factory.provider";
+
 @Injectable()
 export class ConfirmService {
   constructor(
     private readonly mapper: ConfirmMapper,
     private readonly protocolServerService: ProtocolServerService,
     private readonly contextFactory: ContextFactory,
-    private logger: Logger
+    private readonly uuidFactory: UuidFactory,
+    private logger: Logger,
+    @InjectModel(OrderId.name) private orderIdModel: Model<OrderId>
   ) {}
 
   async confirm(requestPayload: ConfimRequestDto): Promise<any> {
@@ -33,11 +42,13 @@ export class ConfirmService {
         requestPayload.context.domain === Domain.retail ||
         requestPayload.context.domain === Domain.tourism
       ) {
-
-        const payment = plainToClass(SelectPayment, requestPayload.message.order.payment);
+        const payment = plainToClass(
+          SelectPayment,
+          requestPayload.message.order.payment
+        );
         const validationErrors = validateSync(payment);
-        if(validationErrors.length>0){
-         throw validationErrors
+        if (validationErrors.length > 0) {
+          throw validationErrors;
         }
 
         let items: any = [];
@@ -46,9 +57,9 @@ export class ConfirmService {
             id: item.id,
             extended_attributes: {},
             quantity: item.quantity,
-            price:item.price,
-            descriptor:item.descriptor,
-            tags:item.tags
+            price: item.price,
+            descriptor: item.descriptor,
+            tags: item.tags,
           });
         });
         paylaod = {
@@ -56,15 +67,15 @@ export class ConfirmService {
           message: {
             order: {
               provider: {
-                id:requestPayload.message.order.provider.id,
+                id: requestPayload.message.order.provider.id,
                 //locations: requestPayload.message.order.locations
               },
-              items:items,
+              items: items,
               addOns: [],
               offers: [],
-              billing:requestPayload.message.order.billing,            
-              fulfillment:requestPayload.message.order.fulfillment,
-              payment:requestPayload.message.order.payment
+              billing: requestPayload.message.order.billing,
+              fulfillment: requestPayload.message.order.fulfillment,
+              payment: requestPayload.message.order.payment,
             },
           },
         };
@@ -92,7 +103,65 @@ export class ConfirmService {
         becknUrl.confirm,
         paylaod
       );
-      const mappedResult = this.mapper.map(result);
+      console.log(result);
+
+      const orderResponse = await Promise.all(
+        result.responses.map(async (value) => {
+          const id = value.message.order.id;
+
+          const order = await this.orderIdModel.findOne({
+            actualOrderId:id 
+          }).exec()
+
+          if(order){
+            return {
+              ...value,
+              message: {
+                ...value.message,
+                order: {
+                  ...value.message.order,
+                  displayId: order.displayOrderId,
+                },
+              },
+            };
+          }
+          function generateNumericID() {
+            const characters = '0123456789';
+            let id = '';
+          
+            for (let i = 0; i < 6; i++) {
+              const randomIndex = Math.floor(Math.random() * characters.length);
+              id += characters[randomIndex];
+            }
+          
+            return id;
+          }
+          const displayId = generateNumericID()
+          const displyOrder = new this.orderIdModel({
+            actualOrderId: id,
+            displayOrderId: displayId,
+            domain:requestPayload.context.domain
+          });
+          await displyOrder.save();
+
+          return {
+            ...value,
+            message: {
+              ...value.message,
+              order: {
+                ...value.message.order,
+                displayId: displayId,
+              },
+            },
+          };
+        })
+      );
+
+      console.log(orderResponse);
+      const mappedResult = this.mapper.map({
+        ...result,
+        responses: orderResponse,
+      });
       return mappedResult;
     } catch (error) {
       this.logger.error("error executing confirm endpoint", error);

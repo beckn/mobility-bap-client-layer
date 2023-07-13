@@ -1,6 +1,5 @@
 import { HttpService } from "@nestjs/axios";
 import { Injectable } from "@nestjs/common";
-import { protocolSeverBaseUrl } from "src/configs/api.config";
 
 @Injectable()
 export class ProtocolServerService {
@@ -8,7 +7,7 @@ export class ProtocolServerService {
   
   async executeAction(url: string, payload: any): Promise<any> {
     try {
-      const finalUrl = `${protocolSeverBaseUrl}/${url}`
+      const finalUrl = `${process.env.PROTOCOL_SERVER_URL}/${url}`
       console.log("EP::",url)
       console.log("URLL",finalUrl)
       console.log(" Clientpayload:::",payload)
