@@ -64,6 +64,7 @@ Navigate to [artefacts folder](./artefacts/) to find various postman collections
 
 The folder contains the following postman collections
 - [OSM Client Layer](./artefacts/OSM-client-layer-requests.postman_collection.json) - This collection has the client layer requests for the OpenStreetMap project where you can search for providers, select catalogs, initiate and confirm orders and track and get the status of the orders using the requests. 
+- [OSM Protocol Server](./artefacts/protocol-server-osm.postman_collection.json) - This collection has the protocol server requests for the OpenStreetMap project where you can search for providers, select catalogs, initiate and confirm orders and track and get the status of the orders using the requests. 
 
 ## Support
 
