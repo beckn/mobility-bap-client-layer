@@ -27,20 +27,29 @@ export class OrderService {
           return Promise.all(
             // Order Items
             userOrder.orders.map((eachOrderItem) => {
+              if (eachOrderItem?.message?.responses === undefined || eachOrderItem?.message?.responses.length === 0) {
+                return {
+                  context: eachOrderItem?.context,
+                  message: {
+                    context: eachOrderItem?.message?.context,
+                    responses: eachOrderItem?.message?.responses,
+                  },
+                };
+              }
               const payload = {
-                context: { ...eachOrderItem.message.context, action: "status" },
+                context: { ...eachOrderItem?.message?.context, action: "status" },
                 message: {
-                  order_id: eachOrderItem.message.responses[0].message.order.id,
+                  order_id: eachOrderItem?.message?.responses[0]?.message?.order.id,
                 },
               };
               return this.protocolServerService
                 .executeAction(becknUrl.status, payload)
                 .then((orderStatus) => {
                   return {
-                    context: eachOrderItem.context,
+                    context: eachOrderItem?.context,
                     message: {
-                      context: eachOrderItem.message.context,
-                      responses: orderStatus.responses,
+                      context: eachOrderItem?.message?.context,
+                      responses: orderStatus?.responses,
                     },
                   };
                 });
@@ -49,7 +58,7 @@ export class OrderService {
             return this.orderModel
               .updateOne(
                 {
-                  parentOrderId: userOrder.parentOrderId,
+                  parentOrderId: userOrder?.parentOrderId,
                 },
                 {
                   orders: reponseOrder,
