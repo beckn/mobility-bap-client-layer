@@ -31,7 +31,7 @@ export class OrderService {
         )
       );
 
-      console.log("RESULT AFTER FETCHING FROM DB", filteredData);
+      console.log("Filtered Result from DB", filteredData);
 
       await Promise.all(
         // Parent Order loop
