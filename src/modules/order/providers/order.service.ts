@@ -21,13 +21,28 @@ export class OrderService {
         })
         .exec();
 
+      console.log("RESULT ALL ORDER::::", JSON.stringify(result));
+
+      const filteredData = result.filter((item) =>
+        item.orders.every(
+          (order) =>
+            order.message.responses.length > 0 &&
+            !order.message.responses.some((response) => "error" in response)
+        )
+      );
+
+      console.log("RESULT AFTER FETCHING FROM DB", filteredData);
+
       await Promise.all(
         // Parent Order loop
-        result.map((userOrder) => {
+        filteredData.map((userOrder) => {
           return Promise.all(
             // Order Items
             userOrder.orders.map((eachOrderItem) => {
-              if (eachOrderItem?.message?.responses === undefined || eachOrderItem?.message?.responses.length === 0) {
+              if (
+                eachOrderItem?.message?.responses === undefined ||
+                eachOrderItem?.message?.responses.length === 0
+              ) {
                 return {
                   context: eachOrderItem?.context,
                   message: {
@@ -37,9 +52,13 @@ export class OrderService {
                 };
               }
               const payload = {
-                context: { ...eachOrderItem?.message?.context, action: "status" },
+                context: {
+                  ...eachOrderItem?.message?.context,
+                  action: "status",
+                },
                 message: {
-                  order_id: eachOrderItem?.message?.responses[0]?.message?.order.id,
+                  order_id:
+                    eachOrderItem?.message?.responses[0]?.message?.order.id,
                 },
               };
               return this.protocolServerService
@@ -68,8 +87,6 @@ export class OrderService {
           });
         })
       );
-
-     
 
       const updatedResult = await this.orderModel
         .find({
