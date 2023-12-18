@@ -21,9 +21,30 @@ export class OrderService {
         })
         .exec();
 
+      console.log("RESULT ALL ORDER::::",JSON.stringify(result))
+
+      const filterResult=result.filter((item)=>{
+       item.orders.map((e)=>{
+        if(e.message.responses===undefined||e.message.responses.length===0)
+      {
+      
+      }})
+      })
+
+    
+    const filteredData =  result.filter(item => 
+      item.orders.every(order => 
+        order.message.responses.length > 0 && !order.message.responses.some(response => 'error' in response)
+      )
+    );
+    
+
+
+      console.log("RESULTTT",filteredData)
+
       await Promise.all(
         // Parent Order loop
-        result.map((userOrder) => {
+        filteredData.map((userOrder) => {
           return Promise.all(
             // Order Items
             userOrder.orders.map((eachOrderItem) => {
