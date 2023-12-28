@@ -43,7 +43,6 @@ async function bootstrap() {
   }),
   cors:true
 });
-
 app.useGlobalPipes(new ValidationPipe());
 const config = new DocumentBuilder()
 .setTitle('BAP Client layer')
