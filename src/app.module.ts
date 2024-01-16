@@ -12,8 +12,10 @@ import { ConfirmModule } from "./modules/confirm/confirm.module";
 import { HttpModule } from "@nestjs/axios";
 import { MongooseModule } from '@nestjs/mongoose';
 import { OrderModule } from "./modules/order/order.module";
-
+import * as dotenv from 'dotenv';
+dotenv.config(); 
 @Module({
+ 
   imports: [
     CancelModule,
     RatingModule,
@@ -27,7 +29,8 @@ import { OrderModule } from "./modules/order/order.module";
     ConfirmModule,
     HttpModule,
     OrderModule,
-    MongooseModule.forRoot('mongodb://root:beckn%40123@localhost/beckn?authSource=admin'),
+    MongooseModule.forRoot(process.env.DATABASE_URL)
+   
   ],
   controllers: [],
   providers: [],
