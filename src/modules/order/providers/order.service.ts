@@ -21,6 +21,7 @@ export class OrderService {
         })
         .exec();
 
+
       console.log("RESULT ALL ORDER::::", JSON.stringify(result));
 
       const filteredData = result.filter((item) =>
@@ -32,6 +33,7 @@ export class OrderService {
       );
 
       console.log("Filtered Result from DB", filteredData);
+
 
       await Promise.all(
         // Parent Order loop
