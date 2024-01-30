@@ -5,9 +5,7 @@ export class SupportMapper {
   map(data: any): any {
     return {
       context: data.context,
-      message: {
-        catalogs: data.responses[0]?.message
-      }
+      message:data.responses[0].message
     }
   }
 }
