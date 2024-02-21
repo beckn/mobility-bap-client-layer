@@ -3,7 +3,7 @@ import { ConfirmMapper } from "../mapper/confirm.mapper";
 import { ProtocolServerService } from "src/shared/providers/protocol-server.provider";
 import {
   ConfimRequestDto,
-  SelectPayment,
+  SelectPayment
 } from "../request/confirm.request.dto";
 import { becknUrl } from "src/configs/api.config";
 import { ContextFactory } from "src/shared/factories/context.factory.provider";
@@ -46,10 +46,10 @@ export class ConfirmService {
           SelectPayment,
           requestPayload.message.order.payment
         );
-        const validationErrors = validateSync(payment);
-        if (validationErrors.length > 0) {
-          throw validationErrors;
-        }
+        // const validationErrors = validateSync(payment);
+        // if (validationErrors.length > 0) {
+        //   throw validationErrors;
+        // }
 
         let items: any = [];
         requestPayload.message.order.items.map((item) => {
@@ -59,7 +59,7 @@ export class ConfirmService {
             quantity: item.quantity,
             price: item.price,
             descriptor: item.descriptor,
-            tags: item.tags,
+            tags: item.tags
           });
         });
         paylaod = {
@@ -67,7 +67,7 @@ export class ConfirmService {
           message: {
             order: {
               provider: {
-                id: requestPayload.message.order.provider.id,
+                id: requestPayload.message.order.provider.id
                 //locations: requestPayload.message.order.locations
               },
               items: items,
@@ -75,9 +75,9 @@ export class ConfirmService {
               offers: [],
               billing: requestPayload.message.order.billing,
               fulfillment: requestPayload.message.order.fulfillment,
-              payment: requestPayload.message.order.payment,
-            },
-          },
+              payment: requestPayload.message.order.payment
+            }
+          }
         };
       } else {
         paylaod = {
@@ -88,9 +88,9 @@ export class ConfirmService {
               provider: requestPayload.message.order.provider,
               items: requestPayload.message.order.items,
               quote: requestPayload.message.order.quote,
-              fulfillment: requestPayload.message.order.fulfillment,
-            },
-          },
+              fulfillment: requestPayload.message.order.fulfillment
+            }
+          }
         };
       }
 
@@ -109,38 +109,40 @@ export class ConfirmService {
         result.responses.map(async (value) => {
           const id = value.message.order.id;
 
-          const order = await this.orderIdModel.findOne({
-            actualOrderId:id 
-          }).exec()
+          const order = await this.orderIdModel
+            .findOne({
+              actualOrderId: id
+            })
+            .exec();
 
-          if(order){
+          if (order) {
             return {
               ...value,
               message: {
                 ...value.message,
                 order: {
                   ...value.message.order,
-                  displayId: order.displayOrderId,
-                },
-              },
+                  displayId: order.displayOrderId
+                }
+              }
             };
           }
           function generateNumericID() {
-            const characters = '0123456789';
-            let id = '';
-          
+            const characters = "0123456789";
+            let id = "";
+
             for (let i = 0; i < 6; i++) {
               const randomIndex = Math.floor(Math.random() * characters.length);
               id += characters[randomIndex];
             }
-          
+
             return id;
           }
-          const displayId = generateNumericID()
+          const displayId = generateNumericID();
           const displyOrder = new this.orderIdModel({
             actualOrderId: id,
             displayOrderId: displayId,
-            domain:requestPayload.context.domain
+            domain: requestPayload.context.domain
           });
           await displyOrder.save();
 
@@ -150,9 +152,9 @@ export class ConfirmService {
               ...value.message,
               order: {
                 ...value.message.order,
-                displayId: displayId,
-              },
-            },
+                displayId: displayId
+              }
+            }
           };
         })
       );
@@ -160,7 +162,7 @@ export class ConfirmService {
       console.log(orderResponse);
       const mappedResult = this.mapper.map({
         ...result,
-        responses: orderResponse,
+        responses: orderResponse
       });
       return mappedResult;
     } catch (error) {
