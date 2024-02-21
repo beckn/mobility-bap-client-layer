@@ -67,8 +67,8 @@ export class ConfirmService {
           message: {
             order: {
               provider: {
-                id: requestPayload.message.order.provider.id
-                //locations: requestPayload.message.order.locations
+                id: requestPayload.message.order.provider.id,
+                locations: requestPayload?.message?.order?.provider?.locations
               },
               items: items,
               addOns: [],
