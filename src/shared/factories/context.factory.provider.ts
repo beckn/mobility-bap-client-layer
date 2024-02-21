@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { UuidFactory } from "./uuid.factory.provider";
 import {
   ProtocolContext,
-  ProtocolContextAction,
+  ProtocolContextAction
 } from "../models/protocol-context.dto";
 import { becknConfig } from "src/configs/api.config";
 import { EnumType } from "typescript";
@@ -33,6 +33,8 @@ export class ContextFactory {
       case Domain.tourism:
         becknDomain = "nic2004:52110";
         break;
+      case Domain.retail_amsterdam:
+        becknDomain = Domain.retail_amsterdam;
     }
     return {
       domain: becknDomain,
@@ -46,7 +48,7 @@ export class ContextFactory {
       bpp_uri: bpp_uri,
       transaction_id: transactionId,
       message_id: messageId,
-      timestamp: date.toDateString(),
+      timestamp: date.toDateString()
     };
   }
 }
